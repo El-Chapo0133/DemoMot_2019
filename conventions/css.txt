@@ -1,0 +1,11 @@
+join all variables in only one file : "var.css"
+
+the file :
+/*
+ * Autor : xxxxx xxxxxxxx
+ * Modification date : jj-dd-yyyy
+ * Desc : Simple css file for all css's variables
+ */
+:root {
+
+}

@@ -1,0 +1,26 @@
+{
+  "name": "demomot2019",
+  "version": "1.0.0",
+  "description": "Demomot - ETML (second year)",
+  "main": "app.js",
+  "scripts": {
+    "build": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/El-Chapo0133/DemoMot_2019.git"
+  },
+  "keywords": [
+    "demomot",
+    "nodejs"
+  ],
+  "author": "Loris Levêque",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/El-Chapo0133/DemoMot_2019/issues"
+  },
+  "homepage": "https://github.com/El-Chapo0133/DemoMot_2019#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}

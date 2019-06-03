@@ -1,0 +1,16 @@
+add the file <link rel="stylesheet" href="imagehover.min.css"> to your page
+
+then for using them, use this template :
+<!-- code... -->
+<figure class="imghvr-fade">
+    <!-- images source -->
+    <img src="#">
+    <figcaption>
+        <!-- Hover Content - what do you want to say -->
+    </figcaption>
+    <!-- place your link here if you want -->
+</figure>
+<!-- code... -->
+
+original docs : http://imagehover.io/docs
+all classes : http://imagehover.io

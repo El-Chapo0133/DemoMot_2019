@@ -1,0 +1,3 @@
+just link the css's file "three-dots.min.css"
+
+original docs : https://nzbin.github.io/three-dots/
