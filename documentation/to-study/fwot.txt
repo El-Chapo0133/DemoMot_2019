@@ -1,11 +1,15 @@
 Force(s) :
-
+	Know and like nodejs
 
 Weakness(s) :
-
+	Simply bad at web coding
+	  -> need an very simply organisation
 
 Opportunity(ies) :
-
+	New library for db communication
 
 Threat(s) :
-
+	unexpected holidays
+	  -> 10.06.2019
+	Sport week
+	  -> 17.06.2019 to 22.06.2019
