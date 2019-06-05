@@ -1,0 +1,31 @@
+body {
+    margin: 0;
+    padding-left: 10%;
+    padding-right: 10%;
+    padding-top: 140px;
+    border: none;
+    font-family: Helvetica, 'Times New Roman', 'Comic Sans MS', sans-serif;
+}
+
+#table-header-second {
+    height: 40px;
+    width: 34%;
+    float: right;
+    border-bottom: 2px solid black;
+}
+#table-header-second td {
+    font-size: 23px;
+    text-align: center;
+    padding-bottom: 12px;
+}
+#table-header-second td a {
+    color: black;
+}
+
+.fa-buffer {
+    height: 60px;
+    width: 60px;
+    color: var(--main-blue);
+    margin-top: 15px;
+    margin-left: 15%;
+}

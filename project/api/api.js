@@ -17,7 +17,7 @@ class Database {
          * Connexion values
          *  -> get from the sql database export
          */
-        conn = mysql.createConnection({
+        return mysql.createConnection({
             host: "localhost",
             database: "demomotdb",
             user: "demomotuser",
@@ -31,8 +31,8 @@ class Database {
      * @callback => log errors or log result
      */
     createConnector() {
-        this.instanceDbVar();
-        conn.connect((err) => {
+        connector = this.instanceDbVar();
+        connector.connect((err) => {
             if (err) {
                 console.log("ouch! " + err);
                 throw err;
@@ -40,6 +40,7 @@ class Database {
                 console.log("connected onto the db ! ");
             }
         });
+        return connector;
     }
     /** ***
      * execute a query with a collback for errors
@@ -47,8 +48,8 @@ class Database {
      * @return {none}
      * @collback => log errors or log result
      */
-    executeSql(sql) {
-        conn.query(sql, (err, result) => {
+    executeSql(connector, sql) {
+        connector.query(sql, (err, result) => {
             if (err) {
                 console.log("ouch! " + err);
                 throw err;
@@ -86,7 +87,8 @@ class Database {
 
         /** execute the query `sql` */
         var result = this.executeSql(sql);
-
+        console.log(result);
+        
         return result;
     }
     /** ================================================================== */

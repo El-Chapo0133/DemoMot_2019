@@ -1,0 +1,16 @@
+#footer-main {
+    position: absolute;
+    margin-top: 80px;
+    height: 80px;
+    width: 100%;
+    left: 0;
+    background-color: var(--main-green);
+}
+
+#footer-main p {
+    margin: 0;
+    font-size: 1.1em;
+    padding-left: 30px;
+    padding-top: 20px;
+    font-family: "Comic Sans MS";
+}
