@@ -1,0 +1,7 @@
+todo :
+    go to https://fonts.google.com
+    select the wanted fonts
+    clic to Family selected
+    then copy-paste the links
+
+original docs : https://fonts.google.com

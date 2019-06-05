@@ -1,0 +1,15 @@
+root folders :
+    "conventions" :
+        all of my conventions, for every programming language that i know (a lot or a little)
+        and some tips that i can check or just that  i should need later
+    "dependencies" :
+        Where the dependencies needed for this programm will be installed,
+        content "package.json", for staying dependencies up to date
+    "documentation" :
+        Where will be stocked all file, information, logs, planification, referencies, or anything
+        for informating the project
+    "project" :
+        The project, yep that's all :D
+
+Way to work on the project:
+    /* REPLACE */
