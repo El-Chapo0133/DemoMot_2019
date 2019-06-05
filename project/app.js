@@ -4,10 +4,11 @@ const PORT = 8081;
 // Requires
 let express = require('express');
 let ejs = require('ejs');
-let api = require('./api/api');
+var api = require('./api/api');
 
 // Variables
 var app = express();
+var database = new api;
 
 // accessibility to ressources files
 app.use(express.static(__dirname + '/ressources/'));
@@ -15,9 +16,7 @@ app.use(express.static(__dirname + '/ressources/'));
 // Local Server
 app.get('/', (request, response) => {
     response.writeHead(200, {'Content-Type': 'text/html'});
-
-    api.getAllCards;
-
+    
     // variable to display (html string)
     var data;
     // ejs render
