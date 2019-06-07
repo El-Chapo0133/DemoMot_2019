@@ -7,20 +7,37 @@ let body_parser = require('body-parser');
 var router = require('./routes/root');
 
 
+/** **********************************************************************
+ * Autor : Levêque Loris
+ * Creation Date : 05.06.2019
+ * Modification Date : 06.06.2019
+ * 
+ * Description :
+ *      Main page
+ *      Will create and start the local server
+ *      Use router for routing page
+ * 
+ * Errors :
+ *      
+ * 
+ ********************************************************************** */
+
 // ################################# Variables #################################
 var app = express();
 
+/** Application settings */
 app.set('view engine', 'ejs');
 app.use(body_parser.urlencoded({ extended: false }));
 app.use(body_parser.json()); // parse form data client
 
-// accessibility to ressources files
+// Accessibility to ressources files
 app.use(express.static(__dirname + '/ressources/'));
 app.use(express.static(__dirname + '/views/'));
 
-/** ################################################################## */
-// Local Server
+/** ################################ Local Server ################################## */
+/** Router for routing page @return {none} */
 app.use(router);
+/** Start the local server */
 app.listen(PORT, (err) => {
     if (err) {
         console.log("ouch! " + err);
