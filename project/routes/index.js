@@ -19,8 +19,9 @@ let ejs = require('ejs');
 module.exports = {
     index: (request, response) => {
         //const SQL = "SELECT Card.idCard, carTitle, carContent, carDesc, carMetrique, creDate, useLogin, tagName, tagColor FROM Card INNER JOIN User ON Card.idUser=User.idUser INNER JOIN Tag ON Tag.idTag=Card.idCard";
-        const SQL = "SELECT * FROM t_Card LEFT JOIN t_Tag ON t_Tag.fkCard=t_Card.idCard";
+        const SQL = "SELECT idCard, GROUP_CONCAT(tagName) AS tagName, GROUP_CONCAT(tagColor) AS tagColor FROM t_Card LEFT JOIN t_Tag ON t_Tag.fkCard=t_Card.idCard GROUP BY t_Card.idCard";
         //const SQL = "SELECT * FROM t_Tag";
+        //const SQL = "SELECT idCard, (SELECT idTag FROM t_Tag WHERE fkCard=idCard) FROM t_Card LEFT JOIN t_Tag ON t_Tag.fkCard=t_Card.idCard GROUP BY t_Card.idCard";
 
         var database = new api;
 
