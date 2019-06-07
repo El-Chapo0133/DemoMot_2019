@@ -1,29 +1,4 @@
-﻿-- phpMyAdmin SQL Dump
-
--- version 4.5.4.1
-
--- http://www.phpmyadmin.net
-
---
-
--- Client :  localhost
-
--- Généré le :  Ven 07 Juin 2019 à 11:05
-
--- Version du serveur :  5.7.11
-
--- Version de PHP :  7.0.3
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
-
+﻿
 
 #------------------------------------------------------------
 #        Script MySQL.
@@ -43,17 +18,6 @@ GRANT SELECT, INSERT, UPDATE, DELETE ON `demomotdb`.* TO 'demomotuser'@'localhos
 DROP DATABASE IF EXISTS demomotdb;
 CREATE DATABASE IF NOT EXISTS demomotdb;
 USE demomotdb;
-
---
--- Base de données :  `demomotdb`
---
-
--- 
---------------------------------------------------------
-
---
--- Structure de la table `t_card`
---
 
 CREATE TABLE `t_card` (
   `idCard` int(11) NOT NULL,
@@ -217,6 +181,3 @@ ALTER TABLE `t_comment`
 ALTER TABLE `t_tag`
   ADD CONSTRAINT `Tag_Card_FK` FOREIGN KEY (`fkCard`) REFERENCES `t_card` (`idCard`);
 
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
