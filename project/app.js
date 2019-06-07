@@ -4,6 +4,7 @@ const PORT = 8081;
 // ################################# Requires #################################
 let express = require('express');
 let body_parser = require('body-parser');
+var router = require('./routes/root');
 
 
 // ################################# Variables #################################
@@ -19,11 +20,8 @@ app.use(express.static(__dirname + '/views/'));
 
 /** ################################################################## */
 // Local Server
-app.get('/', (request, response) => {
-
-    response.writeHead(200, {'Content-Type': 'text/html'});
-    response.end();
-}).listen(PORT, (err) => {
+app.use(router);
+app.listen(PORT, (err) => {
     if (err) {
         console.log("ouch! " + err);
         throw err;

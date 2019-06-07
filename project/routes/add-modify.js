@@ -8,13 +8,13 @@ module.exports = {
 
         var connector = database.createConnector();
 
-        var dataFromDB = database.execute(connector, SQL);
+        var dataFromDB = database.executeSql(connector, SQL);
 
         obj = {
             "card": dataFromDB
         }
 
-        var toDisplay = ejs.renderFile('../views/add-modify.ejs', obj, (err, str) => {
+        var toDisplay = ejs.renderFile('views/add-modify.ejs', obj, (err, str) => {
             if (err) {
                 console.log("failed load add-modify.ejs");
                 throw err;
@@ -29,15 +29,19 @@ module.exports = {
         response.end();
     },
     add: (request, response) => {
-        
+        var toDisplay
 
-        var toDisplay = ejs.renderFile('../views/add-modify.ejs', null, (err, str) => {
+        obj = {
+            "card": undefined
+        }
+
+        ejs.renderFile("views/add-modify.ejs", obj, (err, str) => {
             if (err) {
                 console.log("failed load add-modify.ejs");
                 throw err;
             } else {
                 console.log("add-modify loaded");
-                return str;
+                toDisplay = str;
             }
         });
 

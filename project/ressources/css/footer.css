@@ -1,5 +1,5 @@
 #footer-main {
-    position: absolute;
+    display: flex;
     margin-top: 80px;
     height: 80px;
     width: 100%;

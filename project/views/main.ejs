@@ -15,12 +15,25 @@
 
         <!-- Content -->
         <table id="table-header-second">
-            <td><td>lien 1</td><td>lien 2</td></td>
+            <td><td><a href="http://localhost:8081/add">Ajouter</a></td><td><a href="http://localhost:8081/register">S'enregistrer</a></td></td>
         </table>
 
-        <% cards.forEach((card) => { %>
-            <h1></h1>
-        <% }) %>
+        <div id="main-content">
+            <% cards.forEach((card) => { %>
+                <div class="card-main">
+                    <div class="tag-content">
+                        <p><%= card.tagName %></p>
+                    </div>
+                    <p class="card-owner"><%= card.useLogin %></p>
+                    <h2 class="card-title"><%= card.carTitle %></h2>
+                    <p class="card-desc"><%= card.carDesc %></p>
+                    <p class="card-content"><%= card.carContent %></p>
+                    <p class="card-metrique"><%= card.carMetrique %>/255</p>
+                    <p class="card-date"><%= card.creDate %></p>
+                    <p class="card-link"><a href="http://localhost:8081/modify">Modifier</a></p>
+                </div>
+            <% }) %>
+        </div>
 
         <% include ../models/footer %>
     </body>

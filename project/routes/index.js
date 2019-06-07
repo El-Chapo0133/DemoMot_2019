@@ -3,29 +3,35 @@ let ejs = require('ejs');
 
 module.exports = {
     index: (request, response) => {
-        const SQL = "SELECT idCard, carTitle, carContent, carDesc, carMetrique FROM Card";
+        //const SQL = "SELECT Card.idCard, carTitle, carContent, carDesc, carMetrique, creDate, useLogin, tagName, tagColor FROM Card INNER JOIN User ON Card.idUser=User.idUser INNER JOIN Tag ON Tag.idTag=Card.idCard";
+        const SQL = "SELECT * FROM t_Card LEFT JOIN t_Tag ON t_Tag.fkCard=t_Card.idCard";
+        //const SQL = "SELECT * FROM Tag";
+
         var database = new api;
 
         var connector = database.createConnector();
-        
-        var dataFromDB = database.executeSql(connector, SQL);
 
-        obj = {
-            "cards": dataFromDB
-        };
+        database.executeSql(connector, SQL, (dataFromDB) => {
+            var toDisplay;
 
-        var toDisplay = ejs.renderFile("../views/main.ejs", ebj, (err, str) => {
-            if (err) {
-                console.log("failed load index | err:" + err);
-                throw err;
-            } else {
-                console.log("index loaded!");
-                return str;
-            }
+            obj = {
+                "cards": dataFromDB
+            };
+    
+            ejs.renderFile("views/main.ejs", obj, (err, str) => {
+                if (err) {
+                    console.log("failed load index | err:" + err);
+                    throw err;
+                } else {
+                    console.log("index loaded! ");
+                    toDisplay = str;
+                }
+            });
+            
+            response.writeHead(200, {"Content-Type": "text/html"});
+            response.write(toDisplay);
+            response.end();
         });
 
-        response.writeHead(200, {"Content-Type": "text/html"});
-        response.write(toDisplay);
-        response.end();
     }
 }

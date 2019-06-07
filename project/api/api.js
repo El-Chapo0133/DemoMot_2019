@@ -1,6 +1,5 @@
 let mysql = require('mysql');
 
-var conn;
 
 class Database {
     constructor() {
@@ -31,7 +30,7 @@ class Database {
      * @callback => log errors or log result
      */
     createConnector() {
-        connector = this.instanceDbVar();
+        var connector = this.instanceDbVar();
         connector.connect((err) => {
             if (err) {
                 console.log("ouch! " + err);
@@ -48,13 +47,14 @@ class Database {
      * @return {none}
      * @collback => log errors or log result
      */
-    executeSql(connector, sql) {
+    executeSql(connector, sql, callback) {
         connector.query(sql, (err, result) => {
             if (err) {
                 console.log("ouch! " + err);
                 throw err;
             } else {
                 console.log(result);
+                callback(result);
                 return result;
             }
         });
@@ -65,8 +65,8 @@ class Database {
      * @return {String} => string value of the connexion
      * @collback {none}
      */
-    tryConnexion() {
-        if (conn.state !== "connected") {
+    tryConnexion(connector) {
+        if (connector.state !== "connected") {
             return String(conn.state);
         } else {
             return "not created";
