@@ -6,7 +6,8 @@ let express = require('express');
 let ejs = require('ejs');
 let body_parser = require('body-parser');
 let mysql = require('mysql');
-let middleWare = require('../mw_json/json_tag.mw');
+let middleWareJson = require('../middleWares/json_tag.mw');
+let middleWareColor = require('../middleWares/color_tag.mw');
 
 // Variables
 var app = express();
@@ -37,9 +38,9 @@ app.get('/', (request, response) => {
             throw err;
         } else {
             //console.log(result);
-            var lastJson = middleWare.createJsonTag(result);
+            var lastJson = middleWareJson.createJsonTag(result);
 
-            console.log(lastJson);
+            //console.log(lastJson.dataset[1].tags);
         }
     });
 
