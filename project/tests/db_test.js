@@ -6,6 +6,7 @@ let express = require('express');
 let ejs = require('ejs');
 let body_parser = require('body-parser');
 let mysql = require('mysql');
+let middleWare = require('../mw_json/json_tag.mw');
 
 // Variables
 var app = express();
@@ -31,16 +32,14 @@ global.db = db;
 app.get('/', (request, response) => {
     /** ######################################################## */
 
-    db.query("SELECT * FROM User", (err, result) => {
+    db.query("SELECT idCard, carTitle, carDesc, carContent, GROUP_CONCAT(tagName SEPARATOR ';') AS tagName, GROUP_CONCAT(tagColor SEPARATOR ';') AS tagColor FROM t_Card LEFT JOIN t_Tag ON t_Tag.fkCard=t_Card.idCard GROUP BY t_Card.idCard", (err, result) => {
         if (err) {
             throw err;
         } else {
-            response.renderFile('main.ejs', {
-                cards: result
-            }, (err, str) => {
-                if (err) {throw err;}
-                response.write(str);
-            });
+            //console.log(result);
+            var lastJson = middleWare.createJsonTag(result);
+
+            console.log(lastJson);
         }
     });
 

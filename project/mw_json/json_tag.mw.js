@@ -52,9 +52,11 @@ module.exports = {
         // check if the object has been made for do not rewrite second line
         var made = false;
         // for every object (card)
-        _initialJson.dataset.forEach(element => {
+        _initialJson.forEach(element => {
             // get string
             var element_string = JSON.stringify(element);
+
+            element_string = element_string.replace('\n', '');
             // parse it from ','
             var element_array = element_string.split(",");
 
@@ -137,7 +139,7 @@ module.exports = {
                     // then add the object created on the string json
                     reconstructJson += tags;
 
-                } else if (i % 3 != 2) {
+                } else if (!element_array[i].startsWith('"tag') && i != element_array.length) {
                     // if its not a line that we need to change
                     reconstructJson += tab + element_array[i] + ',\n';
 
@@ -146,6 +148,9 @@ module.exports = {
             }
             count++;
         });
+        // delete the last ',' and add '\n' (bug without this)
+        reconstructJson = reconstructJson.substring(0, reconstructJson.length - 2);
+        reconstructJson += '\n';
         // add the end of the json
         reconstructJson += endJson;
         // parse it into a json file
