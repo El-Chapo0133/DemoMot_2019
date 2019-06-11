@@ -53,7 +53,6 @@ class Database {
                 console.log("ouch! " + err);
                 throw err;
             } else {
-                console.log(result);
                 callback(result);
                 return result;
             }
@@ -71,64 +70,6 @@ class Database {
         } else {
             return "not created";
         }
-    }
-    /** ############################################ Query DB Part ############################################ */
-    /** ***
-     * get data from table Card
-     * @param {none}
-     * @return {data}
-     * @collback {none}
-     */
-    getAllCards() {
-        /** reconnect onto the db */
-        this.createConnector();
-        /** sql query [string] */
-        var sql = "SELECT idCard, carTitle, carContent, carDesc, carMetrique FROM Card";
-
-        /** execute the query `sql` */
-        var result = this.executeSql(sql);
-        console.log(result);
-        
-        return result;
-    }
-    /** ================================================================== */
-    /** ***
-     * get every user from the database
-     * @param {none}
-     * @return {none}
-     * @callback {none}
-     */
-    getAllUsers() {
-        /** reconnect onto the db */
-        this.createConnector();
-        /** sql query [string] */
-        var sql = "SELECT idUser, useName, useSurname, useEmail, useLogin, usePassword, useImage, useDesc FROM User";
-
-        /** execute the query `sql` */
-        var result = this.executeSql(sql);
-
-        return result;
-    }
-    /** ================================================================== */
-    /** ***
-     * insert card into the table Card
-     * @param {String} _title   => title of the new card
-     * @param {String} _content => content of the new card
-     * @param {String} _desc    => description of the new card
-     * @param {Integer} _metric => metric of the new card (priority)
-     * @return {none}
-     * @collback {none}
-     */
-    insertCards(_title, _content, _desc, _metric) {
-        /** reconnect onto the db */
-        this.createConnector();
-        /** sql query [string] */
-        var sql = "INSERT INTO Card (carTitle, carContent, carDesc, carMetrique) VALUES ('" + _title + "', '" + _content + "', '" + _desc + "', " + _metric + ")";
-
-        /** execute the query `sql` */
-        var result = this.executeSql(sql);
-
-        return result;
     }
 }
 

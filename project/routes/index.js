@@ -1,5 +1,6 @@
 let api = require("../api/api");
 let ejs = require('ejs');
+let json_mw = require('../middleWares/json_tag.mw');
 
 /** **********************************************************************
  * Autor : Levêque Loris
@@ -18,10 +19,7 @@ let ejs = require('ejs');
 
 module.exports = {
     index: (request, response) => {
-        //const SQL = "SELECT Card.idCard, carTitle, carContent, carDesc, carMetrique, creDate, useLogin, tagName, tagColor FROM Card INNER JOIN User ON Card.idUser=User.idUser INNER JOIN Tag ON Tag.idTag=Card.idCard";
-        const SQL = "SELECT idCard, GROUP_CONCAT(tagName) AS tagName, GROUP_CONCAT(tagColor) AS tagColor FROM t_Card LEFT JOIN t_Tag ON t_Tag.fkCard=t_Card.idCard GROUP BY t_Card.idCard";
-        //const SQL = "SELECT * FROM t_Tag";
-        //const SQL = "SELECT idCard, (SELECT idTag FROM t_Tag WHERE fkCard=idCard) FROM t_Card LEFT JOIN t_Tag ON t_Tag.fkCard=t_Card.idCard GROUP BY t_Card.idCard";
+        const SQL = "SELECT idCard, carTitle, carDesc, carContent, carMetrique, GROUP_CONCAT(tagName SEPARATOR ';') AS tagName, GROUP_CONCAT(tagColor SEPARATOR ';') AS tagColor FROM t_Card LEFT JOIN t_Tag ON t_Tag.fkCard=t_Card.idCard GROUP BY t_Card.idCard";
 
         var database = new api;
 
@@ -30,10 +28,14 @@ module.exports = {
         database.executeSql(connector, SQL, (dataFromDB) => {
             var toDisplay;
 
+            // reconstruct json
+            var dataReconstructed = json_mw.createJsonTag(dataFromDB);
+            // object to send into the view
             obj = {
-                "cards": dataFromDB
+                "cards": dataReconstructed
             };
-
+            // generate html with ejs library
+            // @callback {when file is loaded}
             ejs.renderFile("views/main.ejs", obj, (err, str) => {
                 if (err) {
                     console.log("failed load index | err:" + err);
@@ -43,7 +45,7 @@ module.exports = {
                     toDisplay = str;
                 }
             });
-
+            // send html
             response.writeHead(200, {"Content-Type": "text/html"});
             response.write(toDisplay);
             response.end();

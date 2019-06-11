@@ -56,7 +56,6 @@ module.exports = {
             // get string
             var element_string = JSON.stringify(element);
 
-            element_string = element_string.replace('\n', '');
             // parse it from ','
             var element_array = element_string.split(",");
 
@@ -140,7 +139,7 @@ module.exports = {
                     // then add the object created on the string json
                     reconstructJson += tags;
 
-                } else if (!element_array[i].startsWith('"tag') && i != element_array.length) {
+                } else if (!element_array[i].startsWith('"tag') && !element_array[i].startsWith('Tag') && i != element_array.length) {
                     // if its not a line that we need to change
                     reconstructJson += tab + element_array[i] + ',\n';
 
