@@ -128,31 +128,36 @@ module.exports = {
 
                     }
                     // close array and object
-                    tags += tab + ']}';
+                    tags += tab + ']}'
 
                     // add ',' if it's not the last object
-                    if (count != element_array.length - 1) {
-                        tags += ',\n';
+                    if (count != element_array.length) {
+                        tags += ',\n'
                     } else {
-                        tags += '\n';
+                        tags += '\n'
                     }
                     // then add the object created on the string json
                     reconstructJson += tags;
 
-                } else if (!element_array[i].startsWith('"tag') && !element_array[i].startsWith('Tag') && i != element_array.length) {
+                } else if (!element_array[i].startsWith('"tag') && !element_array[i].startsWith('Tag')) {
                     // if its not a line that we need to change
-                    reconstructJson += tab + element_array[i] + ',\n';
+                    reconstructJson += tab + element_array[i] + ',\n'
 
-                    made = false;
+                    made = false
                 }
             }
-            count++;
+            count++
         });
         // delete the last ',' and add '\n' (bug without this)
         reconstructJson = reconstructJson.substring(0, reconstructJson.length - 2);
-        reconstructJson += '\n';
+        if (reconstructJson[reconstructJson.length - 1] != '}') {
+            reconstructJson += '}'
+        }
+        reconstructJson += '\n'
         // add the end of the json
-        reconstructJson += endJson;
+        reconstructJson += endJson
+
+        console.log(reconstructJson);
         // parse it into a json file
         var lastJson = JSON.parse(reconstructJson);
         // then return it

@@ -43,24 +43,25 @@ module.exports = {
         response.end();
     },
     add: (request, response) => {
-        var toDisplay
+        var carTitle = request.body.title.replace(',', ' ');
+        var carDesc = request.body.desc.replace(',', ' ');
+        var carContent = request.body.content.replace(',', ' ');
+        var carMetrique = request.body.metrique;
 
-        obj = {
-            "card": undefined
-        }
+        console.log(carTitle);
 
-        ejs.renderFile("views/add-modify.ejs", obj, (err, str) => {
-            if (err) {
-                console.log("failed load add-modify.ejs");
-                throw err;
-            } else {
-                console.log("add-modify loaded");
-                toDisplay = str;
-            }
+        // carTitle, carDesc, carContent, carMetrique
+        const SQL = "INSERT INTO t_Card (carTitle, carDesc, carContent, carMetrique, fkUser) VALUES ('" + carTitle + "', '" + carDesc + "', '" + carContent + "', " + carMetrique + ", 1)";
+        //const SQL = "DELETE FROM t_User WHERE idUser = 3 OR idUser = 4 OR idUser = 5 OR idUser = 6";
+
+        var database = new api;
+
+        var connector = database.createConnector();
+
+        database.executeSql(connector, SQL, (dataFromDB) => {
+            //response.redirect('http://localhost:8081/index');
+            //window.location.href = 'index';
+            response.redirect('index');
         });
-
-        response.writeHead(200, {"Content-Type": "text/html"});
-        response.write(toDisplay);
-        response.end();
     }
 }

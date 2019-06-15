@@ -48,7 +48,7 @@ CREATE TABLE t_Card(
         fkUser      Int NOT NULL
 	,CONSTRAINT Card_PK PRIMARY KEY (idCard)
 
-	,CONSTRAINT Card_User_FK FOREIGN KEY (fkUser) REFERENCES t_User(idUser)
+	,CONSTRAINT Card_User_FK FOREIGN KEY (fkUser) REFERENCES t_User(idUser) ON DELETE CASCADE
 )ENGINE=InnoDB;
 
 
@@ -63,7 +63,7 @@ CREATE TABLE t_Tag(
         fkCard   Int NOT NULL
 	,CONSTRAINT Tag_PK PRIMARY KEY (idTag)
 
-	,CONSTRAINT Tag_Card_FK FOREIGN KEY (fkCard) REFERENCES t_Card(idCard)
+	,CONSTRAINT Tag_Card_FK FOREIGN KEY (fkCard) REFERENCES t_Card(idCard) ON DELETE CASCADE
 )ENGINE=InnoDB;
 
 
@@ -79,7 +79,6 @@ CREATE TABLE t_Comment(
         fkCard     Int NOT NULL
 	,CONSTRAINT t_Comment_PK PRIMARY KEY (idComment)
 
-	,CONSTRAINT t_Comment_User_FK FOREIGN KEY (fkUser) REFERENCES t_User(idUser)
-	,CONSTRAINT t_Comment_Card0_FK FOREIGN KEY (fkCard) REFERENCES t_Card(idCard)
+	,CONSTRAINT t_Comment_User_FK FOREIGN KEY (fkUser) REFERENCES t_User(idUser) ON DELETE CASCADE
+	,CONSTRAINT t_Comment_Card0_FK FOREIGN KEY (fkCard) REFERENCES t_Card(idCard) ON DELETE CASCADE
 )ENGINE=InnoDB;
-
