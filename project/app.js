@@ -34,6 +34,7 @@ app.use(body_parser.json()); // parse form data client
 app.use(express.static(__dirname + '/ressources/css'));
 app.use(express.static(__dirname + '/ressources/js'));
 app.use(express.static(__dirname + '/views/'));
+app.use(express.static(__dirname + '/middleWares/'));
 
 /** ################################ Local Server ################################## */
 /** Router for routing page @return {none} */

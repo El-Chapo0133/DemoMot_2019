@@ -156,8 +156,6 @@ module.exports = {
         reconstructJson += '\n'
         // add the end of the json
         reconstructJson += endJson
-
-        console.log(reconstructJson);
         // parse it into a json file
         var lastJson = JSON.parse(reconstructJson);
         // then return it

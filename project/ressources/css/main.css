@@ -150,6 +150,30 @@ a {
     border-radius: 8px;
     border: 2px solid var(--grey-border);
 }
+.modify-card-content-hidden {
+    width: 800px;
+    height: 600px;
+    background: var(--grey-bg);
+    position: fixed;
+    left: 2000px;
+    top: 60px;
+    z-index: 1;
+    transition: .2s;
+    border-radius: 8px;
+    border: 2px solid var(--grey-border);
+}
+.modify-card-content-display {
+    width: 800px;
+    height: 600px;
+    background: var(--grey-bg);
+    left: 5%;
+    position: fixed;
+    top: 60px;
+    z-index: 1;
+    transition: .2s;
+    border-radius: 8px;
+    border: 2px solid var(--grey-border);
+}
 #add-content button {
     position: relative;
     float: right;

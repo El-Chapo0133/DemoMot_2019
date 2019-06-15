@@ -12,6 +12,7 @@
         <link href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet">
     </head>
     <body>
+        <script type="text/javascript" src="insertValues.mw.js"></script>
         <% include ../models/header %>
 
         <!-- Content -->
@@ -24,7 +25,12 @@
                 <button class="button-close"><i class="far fa-times-circle fa-2x"></i></button>
 
                 <% include ../models/form.add.ejs %>
+            </div>
+        </div>
 
+        <div class="modify-card-content-hidden">
+            <div id="modify-content">
+                <button>test</button>
             </div>
         </div>
 
@@ -42,7 +48,7 @@
                     <p class="card-desc"><%= card.carDesc %></p>
                     <p class="card-content"><%= card.carContent %></p>
                     <p class="card-metrique"><%= card.carMetrique %>/255</p>
-                    <p class="card-link"><a href="/modify">Modifier</a> <a href="/delete?id=<%= card.idCard %>">Supprimer</a></p>
+                    <p class="card-link"><a class="display-modify-card" onclick="insertVal(<%= card.idCard %>)">Modifier</a> <a href="/delete?id=<%= card.idCard %>">Supprimer</a></p>
                 </div>
             <% }) %>
         </div>
