@@ -1,0 +1,27 @@
+ <% if (left == true) { left = false %>
+                    <div class="card-main-left">
+                        <div class="tag-content">
+                            <% card.tags.forEach((tag) => { %>
+                                <h5 style="background-color: #<%= tag.tagColor %>"><%= tag.tagName %></h5>
+                            <% }) %>
+                        </div>
+                        <h2 class="card-title"><%= card.carTitle %></h2>
+                        <p class="card-desc"><%= card.carDesc %></p>
+                        <p class="card-content"><%= card.carContent %></p>
+                        <p class="card-metrique"><%= card.carMetrique %>/255</p>
+                        <p class="card-link"><a href="/modify">Modifier</a> <a href="/delete?id=<%= card.idCard %>">Supprimer</a></p>
+                    </div>
+                <% } else { left = true %>
+                    <div class="card-main-right">
+                        <div class="tag-content">
+                            <% card.tags.forEach((tag) => { %>
+                                <h5 style="background-color: #<%= tag.tagColor %>"><%= tag.tagName %></h5>
+                            <% }) %>
+                        </div>
+                        <h2 class="card-title"><%= card.carTitle %></h2>
+                        <p class="card-desc"><%= card.carDesc %></p>
+                        <p class="card-content"><%= card.carContent %></p>
+                        <p class="card-metrique"><%= card.carMetrique %>/255</p>
+                        <p class="card-link"><a href="/modify">Modifier</a> <a href="/delete?id=<%= card.idCard %>">Supprimer</a></p>
+                    </div>
+                <% } %>

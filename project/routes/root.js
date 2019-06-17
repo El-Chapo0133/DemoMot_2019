@@ -1,7 +1,9 @@
 let express = require('express');
 let routeIndex = require('./index');
 let routeAddModify = require('./add-modify');
+let routeDelete = require('./delete');
 
+// routeur variable
 let router = express.Router();
 
 /** **********************************************************************
@@ -34,6 +36,16 @@ router.use((request, response, next) => {
 });
 
 /** ############################ Routes ############################ */
+/** ***
+ * Redirect into the page index
+ * @param {none}
+ * @return {none}
+ * @callback {none}
+ */
+router.get('/', (request, response) => {
+  console.log("route [router]: /  -> redirect to {index}");
+  response.redirect('index');
+});
  /** ***
   * Page index
   * @param {none}
@@ -51,7 +63,7 @@ router.get('/index', (request, response) => {
   * @return {none}
   * @callback {none}
   * ******/
-router.get('/add', (request, response) => {
+router.post('/add', (request, response) => {
     console.log("route [router]: add");
     routeAddModify.add(request, response);
 });
@@ -67,6 +79,11 @@ router.get('/modify', (request, response) => {
     console.log("route [router]: modify");
     // TODO : pass card id from get or post method
     routeAddModify.modify(request, response, 0);
+});
+
+router.get('/delete', (request, response) => {
+  console.log("route [router]: delete");
+  routeDelete.delete(request, response);
 });
 
  /** ***

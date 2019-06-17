@@ -3,37 +3,60 @@
         <meta charset="UTF-8">
         <title>Main</title>
 
-        <link rel="stylesheet" type="text/css" href="css/footer.css">
-        <link rel="stylesheet" type="text/css" href="css/header.css">
-        <link rel="stylesheet" type="text/css" href="css/main.css">
-        <link rel="stylesheet" type="text/css" href="css/var.css">
+        <link rel="stylesheet" type="text/css" href="footer.css">
+        <link rel="stylesheet" type="text/css" href="header.css">
+        <link rel="stylesheet" type="text/css" href="main.css">
+        <link rel="stylesheet" type="text/css" href="var.css">
 
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+        <link href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet">
     </head>
     <body>
+        <script type="text/javascript" src="insertValues.mw.js"></script>
         <% include ../models/header %>
 
         <!-- Content -->
         <table id="table-header-second">
-            <td><td><a href="http://localhost:8081/add">Ajouter</a></td><td><a href="http://localhost:8081/register">S'enregistrer</a></td></td>
+            <td><td><a class="display-add-card" id="displayAddCard">Ajouter</a></td><td><a href="http://localhost:8081/register">S'enregistrer</a></td></td>
         </table>
 
+        <div class="add-card-content-hidden">
+            <div id="add-content">
+                <button class="button-close"><i class="far fa-times-circle fa-2x"></i></button>
+
+                <% include ../models/form.add.ejs %>
+            </div>
+        </div>
+
+        <div class="modify-card-content-hidden">
+            <div id="modify-content">
+                <button>test</button>
+            </div>
+        </div>
+
+        <% var left = true; %>
+
         <div id="main-content">
-            <% cards.forEach((card) => { %>
-                <div class="card-main">
+            <% cards.dataset.forEach((card) => { %>
+                <div class="card-main-left">
                     <div class="tag-content">
-                        <p><%= card.tagName %></p>
+                        <% card.tags.forEach((tag) => { %>
+                            <h5 style="background-color: #<%= tag.tagColor %>"><%= tag.tagName %></h5>
+                        <% }) %>
                     </div>
-                    <p class="card-owner"><%= card.useLogin %></p>
                     <h2 class="card-title"><%= card.carTitle %></h2>
                     <p class="card-desc"><%= card.carDesc %></p>
                     <p class="card-content"><%= card.carContent %></p>
                     <p class="card-metrique"><%= card.carMetrique %>/255</p>
-                    <p class="card-link"><a href="http://localhost:8081/modify">Modifier</a></p>
+                    <p class="card-link"><a class="display-modify-card" onclick="insertVal(<%= card.idCard %>)">Modifier</a> <a href="/delete?id=<%= card.idCard %>">Supprimer</a></p>
                 </div>
             <% }) %>
         </div>
+            
 
         <% include ../models/footer %>
+
+        <script type="text/javascript" src="jquery(3-4-1).min.js"></script>
+        <script type="text/javascript" src="event.js"></script>
     </body>
 </html>

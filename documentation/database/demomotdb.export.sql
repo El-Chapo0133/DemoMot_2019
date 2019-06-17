@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿
 
 #------------------------------------------------------------
@@ -18,6 +19,64 @@ GRANT SELECT, INSERT, UPDATE, DELETE ON `demomotdb`.* TO 'demomotuser'@'localhos
 DROP DATABASE IF EXISTS demomotdb;
 CREATE DATABASE IF NOT EXISTS demomotdb;
 USE demomotdb;
+=======
+﻿-- phpMyAdmin SQL Dump
+
+-- version 4.5.4.1
+
+-- http://www.phpmyadmin.net
+
+--
+
+-- Client :  localhost
+
+-- Généré le :  Ven 07 Juin 2019 à 11:05
+
+-- Version du serveur :  5.7.11
+
+-- Version de PHP :  7.0.3
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+
+
+#------------------------------------------------------------
+#        Script MySQL.
+#------------------------------------------------------------
+
+#------------------------------------------------------------
+#	 User
+#------------------------------------------------------------
+DROP USER IF EXISTS 'demomotuser'@'localhost';
+CREATE USER IF NOT EXISTS 'demomotuser'@'locahost';
+CREATE USER IF NOT EXISTS 'demomotuser'@'localhost' IDENTIFIED BY "jL6H922e7u2zt3sMDHKa";
+GRANT USAGE ON *.* TO 'demotmotdb'@'localhost' REQUIRE NONE WITH MAX_QUERIES_PER_HOUR 0 MAX_CONNECTIONS_PER_HOUR 0 MAX_UPDATES_PER_HOUR 0 MAX_USER_CONNECTIONS 0;
+GRANT SELECT, INSERT, UPDATE, DELETE ON `demomotdb`.* TO 'demomotuser'@'localhost';
+#------------------------------------------------------------
+#	 Database
+#------------------------------------------------------------
+DROP DATABASE IF EXISTS demomotdb;
+CREATE DATABASE IF NOT EXISTS demomotdb;
+USE demomotdb;
+
+--
+-- Base de données :  `demomotdb`
+--
+
+-- 
+--------------------------------------------------------
+
+--
+-- Structure de la table `t_card`
+--
+>>>>>>> 8756d978c5e8bcb95a1d6789610feb666cf30a79
 
 CREATE TABLE `t_card` (
   `idCard` int(11) NOT NULL,
