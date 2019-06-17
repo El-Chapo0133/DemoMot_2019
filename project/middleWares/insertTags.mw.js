@@ -3,11 +3,11 @@ let api     = require('../api/api')
 module.exports = {
     /**
      * tags syntax :
-     * tags = {
+     * tags = [{
      *      tagName: "",
      *      tagColor: "",
      *      idCard: X
-     * }
+     * }, {...}]
      */
     insertTags: (tags) => {
         // api variable

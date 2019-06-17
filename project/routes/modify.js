@@ -1,6 +1,7 @@
-let api     = require('../api/api')
-let ejs     = require('ejs')
-let json_mw = require('../middleWares/json_tag.mw');
+let api         = require('../api/api')
+let ejs         = require('ejs')
+let json_mw     = require('../middleWares/json_tag.mw');
+let insert_tags = require('../middleWares/insertTags.mw')
 
 module.exports = {
     modify: (request, response) => {
@@ -31,7 +32,9 @@ module.exports = {
         });
     },
     modifySecond: (request, reponse) => {
-        console.log("made!")
+        var tags = JSON.parse(request.body.jsonTags)
+        insert_tags.insertTags(tags.dataset)
+
     }
 }
 

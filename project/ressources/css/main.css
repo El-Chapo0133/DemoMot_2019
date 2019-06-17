@@ -290,3 +290,8 @@ a {
     margin-left: 8px;
     height: 36px;
 }
+.hidden-input {
+    position: absolute;
+    left: -900px;
+    opacity: 0;
+}

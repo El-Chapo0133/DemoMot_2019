@@ -47,12 +47,16 @@
                     </select>
                     <button onclick="addTag()" class="addTag">Ajouter Tag</button>
                     <div id="addTagArea"></div>
+                    <input name="jsonTags" class="hidden-input" id="json_tags">
                     <button type="submit" class="submit-button-modify">Modifier</button>
                 </form>
             </div>
         </div>
         
+        <script type="text/javascript" src="api.js"></script>
+        <script type="text/javascript" src="insertValues.mw.js"></script>
         <script type="text/javascript" src="tag.js"></script>
+        <script type="text/javascript" src="js_json_custom.js"></script>
         
         <% include ../models/footer %>
     </body>

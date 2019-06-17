@@ -36,6 +36,7 @@ app.use(express.static(__dirname + '/ressources/js'))
 app.use(express.static(__dirname + '/views/'))
 app.use(express.static(__dirname + '/middleWares/'))
 app.use(express.static(__dirname + '/api/'))
+app.use(express.static(__dirname + '/library/'))
 
 /** ################################ Local Server ################################## */
 /** Router for routing page @return {none} */
