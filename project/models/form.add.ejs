@@ -8,7 +8,18 @@
     <label class="labFirst" id="labelMetrique">Métrique (1-255  )</label>
     <textarea type="number" name="metrique" id="inputMetrique" cols="1"></textarea>
     <label class="labSecond">Tag(s)</label>
-    <textarea name="tagName" id="inputTag"></textarea><button id="addTag">Ajouter Tag</button>
+    <textarea name="tagName" id="inputTag"></textarea>
+    <select id="select-add">
+        <option name="tagColor" value="222.51.72">Rouge</option>
+        <option name="tagColor" value="81.16.232">Bleu</option>
+        <option name="tagColor" value="81.185.29">Vert</option>
+        <option name="tagColor" value="234.196.29">Jaune</option>
+        <option name="tagColor" value="180.53.196">Violet</option>
+        <option name="tagColor" value="38.38.38">Noir</option>
+        <option name="tagColor" value="255.90.81">Orange</option>
+        <option name="tagColor" value="124.64.27">Brun</option>
+    </select>
+    <button id="addTag">Ajouter Tag</button>
     <div id="addTagArea"></div>
-    <button oneclick="" type="submit" id="addCard">Ajouter Carte</button>
+    <button type="submit" class="submit-button-add">Ajouter Carte</button>
 </form>

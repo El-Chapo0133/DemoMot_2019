@@ -20,17 +20,10 @@
         </table>
 
         <div class="add-card-content-hidden">
-            <div id="add-content">
-                <button class="button-close"><i class="far fa-times-circle fa-2x"></i></button>
+            <div id="form">
+                <button class="button-close" id="icon"><i class="far fa-times-circle fa-2x"></i></button>
 
                 <% include ../models/form.add.ejs %>
-            </div>
-        </div>
-
-        <div class="modify-card-content-hidden">
-            <div id="modify-content">
-                <button class="button-close"><i class="far fa-times-circle fa-2x"></i></button>
-                <p id="p-test"></p>
             </div>
         </div>
 
@@ -46,7 +39,7 @@
                     <p class="card-desc"><%= card.carDesc %></p>
                     <p class="card-content"><%= card.carContent %></p>
                     <p class="card-metrique"><%= card.carMetrique %>/255</p>
-                    <p class="card-link"><a class="display-modify-card" onclick="insertVal(<%= card.idCard %>)">Modifier</a> <a href="/delete?id=<%= card.idCard %>">Supprimer</a></p>
+                    <p class="card-link"><a href="/modify?id=<%= card.idCard %>">Modifier</a> <a href="/delete?id=<%= card.idCard %>">Supprimer</a></p>
                 </div>
             <% }) %>
         </div>
@@ -54,8 +47,8 @@
 
         <% include ../models/footer %>
 
-        <script type="text/javascript" src="insertValues.mw.js"></script>
         <script type="text/javascript" src="api.js"></script>
+        <script type="text/javascript" src="insertValues.mw.js"></script>
         <script type="text/javascript" src="jquery(3-4-1).min.js"></script>
         <script type="text/javascript" src="event.js"></script>
     </body>

@@ -1,10 +1,11 @@
-let express = require('express');
-let routeIndex = require('./index');
-let routeAddModify = require('./add-modify');
-let routeDelete = require('./delete');
+let express     = require('express')
+let routeIndex  = require('./index')
+let routeAdd    = require('./add')
+let routeModify = require('./modify')
+let routeDelete = require('./delete')
 
 // routeur variable
-let router = express.Router();
+let router = express.Router()
 
 /** **********************************************************************
  * Autor : Levêque Loris
@@ -30,8 +31,8 @@ let router = express.Router();
   * ******/
 router.use((request, response, next) => {
     console.log('####################################################');
-    console.log('Time :' + Date.now());
-    console.log('url :' + request.url);
+    console.log('Time :' + Date.now())
+    console.log('url :' + request.url)
     next();
 });
 
@@ -43,8 +44,8 @@ router.use((request, response, next) => {
  * @callback {none}
  */
 router.get('/', (request, response) => {
-  console.log("route [router]: /  -> redirect to {index}");
-  response.redirect('index');
+  console.log("route [router]: /  -> redirect to {index}")
+  response.redirect('index')
 });
  /** ***
   * Page index
@@ -53,8 +54,8 @@ router.get('/', (request, response) => {
   * @callback {none}
   * ******/
 router.get('/index', (request, response) => {
-    console.log("route [router]: index");
-    routeIndex.index(request, response);
+    console.log("route [router]: index")
+    routeIndex.index(request, response)
 });
 
  /** ***
@@ -64,11 +65,9 @@ router.get('/index', (request, response) => {
   * @callback {none}
   * ******/
 router.post('/add', (request, response) => {
-    console.log("route [router]: add");
-    routeAddModify.add(request, response);
+    console.log("route [router]: add")
+    routeAdd.add(request, response)
 });
-
-
  /** ***
   * Page modify
   * @param {none}
@@ -76,14 +75,19 @@ router.post('/add', (request, response) => {
   * @callback {none}
   * ******/
 router.get('/modify', (request, response) => {
-    console.log("route [router]: modify");
+    console.log("route [router]: modify")
     // TODO : pass card id from get or post method
-    routeAddModify.modify(request, response, 0);
+    routeModify.modify(request, response)
+});
+
+router.post('/modify-second', (request, response) => {
+  console.log("route [router]: modify-second")
+  routeModify.modifySecond(request, response)
 });
 
 router.get('/delete', (request, response) => {
-  console.log("route [router]: delete");
-  routeDelete.delete(request, response);
+  console.log("route [router]: delete")
+  routeDelete.delete(request, response)
 });
 
  /** ***
@@ -93,7 +97,7 @@ router.get('/delete', (request, response) => {
   * @callback {none}
   * ******/
 router.get('/login', (request, response) => {
-    console.log("route [router]: login");
+    console.log("route [router]: login")
     // TODO
 });
 
@@ -104,7 +108,7 @@ router.get('/login', (request, response) => {
   * @callback {none}
   * ******/
 router.get('/register', (request, response) => {
-    console.log("route [router]: register");
+    console.log("route [router]: register")
     // TODO
 });
 

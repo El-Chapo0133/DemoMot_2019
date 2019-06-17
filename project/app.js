@@ -1,10 +1,10 @@
 // ################################# Consts #################################
-const PORT = 8081;
+const PORT = 8081
 
 // ################################# Requires #################################
-let express = require('express');
-let body_parser = require('body-parser');
-var router = require('./routes/root');
+let express = require('express')
+let body_parser = require('body-parser')
+var router = require('./routes/root')
 
 
 /** **********************************************************************
@@ -23,19 +23,19 @@ var router = require('./routes/root');
  ********************************************************************** */
 
 // ################################# Variables #################################
-var app = express();
+var app = express()
 
 /** Application settings */
-app.set('view engine', 'ejs');
-app.use(body_parser.urlencoded({ extended: true }));
+app.set('view engine', 'ejs')
+app.use(body_parser.urlencoded({ extended: true }))
 app.use(body_parser.json()); // parse form data client
 
 // Accessibility to ressources files
-app.use(express.static(__dirname + '/ressources/css'));
-app.use(express.static(__dirname + '/ressources/js'));
-app.use(express.static(__dirname + '/views/'));
-app.use(express.static(__dirname + '/middleWares/'));
-app.use(express.static(__dirname + '/api/'));
+app.use(express.static(__dirname + '/ressources/css'))
+app.use(express.static(__dirname + '/ressources/js'))
+app.use(express.static(__dirname + '/views/'))
+app.use(express.static(__dirname + '/middleWares/'))
+app.use(express.static(__dirname + '/api/'))
 
 /** ################################ Local Server ################################## */
 /** Router for routing page @return {none} */
@@ -43,10 +43,10 @@ app.use(router);
 /** Start the local server */
 app.listen(PORT, (err) => {
     if (err) {
-        console.log("ouch! " + err);
+        console.log("ouch! " + err)
         throw err;
     } else {
-        console.log("server lunched on port :" + PORT);
+        console.log("server lunched on port :" + PORT)
     }
 });
 /** ################################################################## */

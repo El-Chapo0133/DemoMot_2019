@@ -16,7 +16,6 @@ a {
     height: 40px;
     width: 34%;
     float: right;
-    border-bottom: 2px solid var(--main-blue);
 }
 #table-header-second td {
     font-size: 23px;
@@ -27,17 +26,22 @@ a {
     color: black;
     text-decoration: none;
     transition: .3s;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-bottom: 2px;
+    border-radius: 3px;
 }
-#table-header-second td:hover > a {
-    letter-spacing: 3px;
+#table-header-second td a:hover {
+    border-bottom: 3px solid var(--main-black);
 }
 
 .fa-buffer {
     height: 60px;
     width: 60px;
-    color: var(--main-blue);
+    color: var(--main-black);
     margin-top: 15px;
     margin-left: 15%;
+    float: left;
 }
 
 #main-content {
@@ -105,6 +109,7 @@ a {
     margin-bottom: 5px;
     margin-left: 2%;
     min-height: 0;
+    background: none;
 }
 
 .tag-content h5 {
@@ -122,8 +127,42 @@ a {
     font-size: 0.7em;
     font-family: "Ubuntu", Helvetica, "Comic Sans MS", sans-serif;
 }
+
+#addTagArea h5 {
+    float: left;
+    margin-left: 5px;
+    margin-right: 5px;
+    border-radius: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 3px;
+    padding-bottom: 2px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    color: var(--white);
+    font-size: 0.7em;
+    font-family: "Ubuntu", Helvetica, "Comic Sans MS", sans-serif;
+}
+#addTagArea {
+    min-height: 30px;
+    width: 60%;
+    border: 1px solid var(--main-black);
+    margin-left: 20%;
+    float: left;
+    margin-top: 16px;
+    padding: 1%;
+}
+
 .display-add-card {
     cursor: pointer;
+}
+#header-title {
+    margin-left: 12%;
+    margin-top: .4em;
+    padding: 0;
+    float: left;
+    font-size: 3.5em;
+    font-family: "Ubuntu", Helvetica, "Comic Sans MS", sans-serif;
 }
 
 .add-card-content-hidden {
@@ -150,105 +189,104 @@ a {
     border-radius: 8px;
     border: 2px solid var(--grey-border);
 }
-.modify-card-content-hidden {
-    width: 800px;
-    height: 600px;
-    background: var(--grey-bg);
-    position: fixed;
-    left: 2000px;
-    top: 60px;
-    z-index: 1;
-    transition: .2s;
-    border-radius: 8px;
-    border: 2px solid var(--grey-border);
-}
-.modify-card-content-display {
-    width: 800px;
-    height: 600px;
-    background: var(--grey-bg);
-    left: 5%;
-    position: fixed;
-    top: 60px;
-    z-index: 1;
-    transition: .2s;
-    border-radius: 8px;
-    border: 2px solid var(--grey-border);
-}
-#add-content button {
-    position: relative;
+#form #icon {
     float: right;
     border: none;
     outline: none;
     margin-right: 5px;
     margin-top: 8px;
+    cursor: pointer;
 }
-
-#add-content {
+#form {
     width: 96%;
     height: 96%;
     margin: 2%;
 }
-#add-content .labFirst {
+#form .labFirst {
     width: 100%;
     float: left;
 }
-#add-content #inputTitle, #add-content #inputDesc, #add-content #inputContent, #add-content #inputMetrique {
+#form #inputTitle, #form #inputDesc, #form #inputContent, #form #inputMetrique {
     width: 95%;
     float: left;
     resize: none;
     margin-right: 5%;
 }
-#add-content .labSecond {
+#form .labSecond {
     float: left;
     margin-top: -15px;
     margin-right: 5px;
 }
-#add-content .labFirst {
+#form .labFirst {
     margin-top: 5px;
 }
-#add-content #inputTitle {
+#form #inputTitle {
     height: 15px;
 }
-#add-content #inputDesc {
+#form #inputDesc {
     height: 30px;
 }
-#add-content #inputContent {
+#form #inputContent {
     height: 90px;
 }
-#add-content #inputMetrique {
+#form #inputMetrique {
     height: 15px;
     width: 10%;
     margin-right: 10%;
 }
-#add-content #labelMetrique {
+#form #labelMetrique {
     margin-top: 10px;
 }
 
-#add-content #inputTag {
+#form #inputTag {
     width: 120px;
     height: 30px;
     resize: none;
     float: left;
     margin-top: -15px;
 }
-#add-content #addTag {
-    position: relative;
+#form .addTag {
     float: left;
     margin-top: -5px;
     margin-left: 3px;
 }
-#add-content #addTag:hover {
+#form .addTag:hover {
     text-decoration: underline;
     cursor: pointer;
 }
-#add-content #addCard {
-    margin-top: 30%;
+.submit-button-add, .submit-button-modify {
+    float: right;
     width: 160px;
     height: 35px;
     background: var(--main-black);
     color: var(--white);
     border-radius: 5px;
 }
-#add-content textarea {
+.submit-button-add {
+    margin-top: 30%;
+}
+.submit-button-modify {
+    margin-top: 6%;
+    margin-right: 46%;
+    margin-bottom: 120px;
+}
+#form textarea {
     font-family: "Ubuntu", Arial, Helvetica, sans-serif;
+}
+.fa-arrow-circle-left {
+    color: var(--main-black);
+    margin-left: 5%;
+    border-radius: 50%;
+    z-index: 1;
+}
+#modify-content {
+    margin-left: 25%;
+    margin-right: 25%;
+    margin-top: 6%;
+}
+#select-add {
+    float: left;
+    margin-top: -15px;
+    margin-left: 8px;
+    height: 36px;
 }

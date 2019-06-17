@@ -28,13 +28,13 @@ module.exports = {
         var connector = database.createConnector();
 
         database.executeSql(connector, SQL, (dataFromDB) => {
-            var toDisplay;
             // reconstruct json
             var dataReconstructed = json_mw.createJsonTag(dataFromDB);
 
             // object to send into the view
             obj = {
-                "cards": dataReconstructed
+                "cards": dataReconstructed,
+                "pageTitle": "Accueil"
             };
             // generate html with ejs library
             // @callback {when file is loaded}
@@ -44,32 +44,16 @@ module.exports = {
                     throw err;
                 } else {
                     console.log("index loaded! ");
-                    toDisplay = str;
+                    // send html
+                    send(response, str);
                 }
             });
-            // send html
-            response.writeHead(200, {"Content-Type": "text/html"});
-            response.write(toDisplay);
-            response.end();
-        });
-    },
-    addCard: (request, response) => {
-        var carTitle = request.body.title;
-
-        console.log(carTitle);
-
-        // carTitle, carDesc, carContent, carMetrique
-        const SQL = "INSERT INTO t_Card (carTitle, carDesc, carContent, carMetrique, fkUSer) SET carTitle = '" + carTitle + "', carDesc = '" + carDesc + "', carContent = '" + carContent + "', carMetrique = '" + carMetrique + "', fkUser = 1";
-
-        var database = new api;
-
-        var connector = database.createConnector();
-
-        database.executeSql(connector, SQL, (dataFromDB) => {
-            alert("Made ! :) " + dataFromDB);
-            //response.redirect('http://localhost:8081/index');
-            //window.location.href = 'index';
-            response.redirect('index');
         });
     }
+}
+
+function send(response, str) {
+    response.writeHead(200, { "Content-Type": "text/html" });
+    response.write(str);
+    response.end();
 }

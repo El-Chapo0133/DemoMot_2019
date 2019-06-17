@@ -16,39 +16,20 @@ let ejs = require('ejs');
  ********************************************************************** */
 
 module.exports = {
-    modify: (request, response, idCard) => {
-        const SQL = "SELECT idCard, carTitle, carContent, carDesc, carMetrique FROM Card WHERE idCard = '" + String(idCard) + "'";
-        var database = new api;
-
-        var connector = database.createConnector();
-
-        var dataFromDB = database.executeSql(connector, SQL);
-
-        obj = {
-            "card": dataFromDB
-        }
-
-        var toDisplay = ejs.renderFile('views/add-modify.ejs', obj, (err, str) => {
-            if (err) {
-                console.log("failed load add-modify.ejs");
-                throw err;
-            } else {
-                console.log("add-modify loaded");
-                return str;
-            }
-        });
-
-        response.WriteHead(200, {"Content-Type": "text/html"});
-        response.write(toDisplay);
-        response.end();
-    },
     add: (request, response) => {
         var carTitle = request.body.title.replace(',', ' ');
         var carDesc = request.body.desc.replace(',', ' ');
         var carContent = request.body.content.replace(',', ' ');
-        var carMetrique = request.body.metrique;
-
-        console.log(carTitle);
+        var carMetrique
+        if (typeof(request.body.metrique) === typeof(1)) {
+            carMetrique = request.body.metrique;
+        } else if (request.body.metrique > 255) {
+            carMetrique = 255
+        } else if (request.body.metrique < 1) {
+            carMetrique = 1
+        } else {
+            carMetrique = 255
+        }
 
         // carTitle, carDesc, carContent, carMetrique
         const SQL = "INSERT INTO t_Card (carTitle, carDesc, carContent, carMetrique, fkUser) VALUES ('" + carTitle + "', '" + carDesc + "', '" + carContent + "', " + carMetrique + ", 1)";

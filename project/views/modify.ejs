@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Main</title>
+
+        <link rel="stylesheet" type="text/css" href="footer.css">
+        <link rel="stylesheet" type="text/css" href="header.css">
+        <link rel="stylesheet" type="text/css" href="main.css">
+        <link rel="stylesheet" type="text/css" href="var.css">
+
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+        <link href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet">    </head>
+    <body>
+        <% include ../models/header %>
+
+        <div class="goBack">
+            <a href="/"><i class="fas fa-arrow-circle-left fa-4x"></i></a>
+        </div>
+
+        <!-- Content -->
+        <table id="table-header-second">
+            <td><td><a href="/index">Accueil</a></td><td><a href="/register">S'enregistrer</a></td></td>
+        </table>
+        
+        <div id="modify-content">
+            <div id="form">
+                <form method="post" action="/modify-second?id=<%= card.idCard %>">
+                    <label class="labFirst">Titre</label>
+                    <textarea type="text" name="title" id="inputTitle" cols="1"><%= card.dataset[0].carTitle %></textarea>
+                    <label class="labFirst">Description</label>
+                    <textarea type="text" name="desc" id="inputDesc" cols="2"><%= card.dataset[0].carDesc %></textarea>
+                    <label class="labFirst">Contenu</label>
+                    <textarea type="text" name="content" id="inputContent" cols="4"><%= card.dataset[0].carContent %></textarea>
+                    <label class="labFirst" id="labelMetrique">Métrique (1-255  )</label>
+                    <textarea type="number" name="metrique" id="inputMetrique" cols="1"><%= card.dataset[0].carMetrique %></textarea>
+                    <label class="labSecond">Tag(s)</label>
+                    <textarea name="tagName" id="inputTag"></textarea>
+                    <select id="select-add">
+                        <option name="tagColor" value="222.51.72">Rouge</option>
+                        <option name="tagColor" value="81.16.232">Bleu</option>
+                        <option name="tagColor" value="81.185.29">Vert</option>
+                        <option name="tagColor" value="234.196.29">Jaune</option>
+                        <option name="tagColor" value="180.53.196">Violet</option>
+                        <option name="tagColor" value="38.38.38">Noir</option>
+                        <option name="tagColor" value="255.90.81">Orange</option>
+                        <option name="tagColor" value="124.64.27">Brun</option>
+                    </select>
+                    <button onclick="addTag()" class="addTag">Ajouter Tag</button>
+                    <div id="addTagArea"></div>
+                    <button type="submit" class="submit-button-modify">Modifier</button>
+                </form>
+            </div>
+        </div>
+        
+        <script type="text/javascript" src="tag.js"></script>
+        
+        <% include ../models/footer %>
+    </body>
+</html>
