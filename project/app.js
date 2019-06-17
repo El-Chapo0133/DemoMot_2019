@@ -35,6 +35,7 @@ app.use(express.static(__dirname + '/ressources/css'));
 app.use(express.static(__dirname + '/ressources/js'));
 app.use(express.static(__dirname + '/views/'));
 app.use(express.static(__dirname + '/middleWares/'));
+app.use(express.static(__dirname + '/api/'));
 
 /** ################################ Local Server ################################## */
 /** Router for routing page @return {none} */

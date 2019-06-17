@@ -12,7 +12,6 @@
         <link href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet">
     </head>
     <body>
-        <script type="text/javascript" src="insertValues.mw.js"></script>
         <% include ../models/header %>
 
         <!-- Content -->
@@ -30,11 +29,10 @@
 
         <div class="modify-card-content-hidden">
             <div id="modify-content">
-                <button>test</button>
+                <button class="button-close"><i class="far fa-times-circle fa-2x"></i></button>
+                <p id="p-test"></p>
             </div>
         </div>
-
-        <% var left = true; %>
 
         <div id="main-content">
             <% cards.dataset.forEach((card) => { %>
@@ -56,6 +54,8 @@
 
         <% include ../models/footer %>
 
+        <script type="text/javascript" src="insertValues.mw.js"></script>
+        <script type="text/javascript" src="api.js"></script>
         <script type="text/javascript" src="jquery(3-4-1).min.js"></script>
         <script type="text/javascript" src="event.js"></script>
     </body>
