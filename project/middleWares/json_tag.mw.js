@@ -131,7 +131,7 @@ module.exports = {
                     tags += tab + ']}'
 
                     // add ',' if it's not the last object
-                    if (count != element_array.length) {
+                    if (count != element_array.length + 1) {
                         tags += ',\n'
                     } else {
                         tags += '\n'
@@ -149,8 +149,12 @@ module.exports = {
             count++
         });
         // delete the last ',' and add '\n' (bug without this)
-        reconstructJson = reconstructJson.substring(0, reconstructJson.length - 2);
-        if (reconstructJson[reconstructJson.length - 1] != '}') {
+        if (reconstructJson[reconstructJson.length - 2] != '[') {
+            reconstructJson = reconstructJson.substring(0, reconstructJson.length - 2);
+        } else {
+            reconstructJson = reconstructJson.substring(0, reconstructJson.length - 1);
+        }
+        if (reconstructJson[reconstructJson.length - 1] != '}' && reconstructJson[reconstructJson.length - 1] != '[') {
             reconstructJson += '}'
         }
         reconstructJson += '\n'

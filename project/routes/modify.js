@@ -2,11 +2,12 @@ let api         = require('../api/api')
 let ejs         = require('ejs')
 let json_mw     = require('../middleWares/json_tag.mw');
 let insert_tags = require('../middleWares/insertTags.mw')
+let loadInfoPage = require('../custom/loadInfoPage')
 
 module.exports = {
     modify: (request, response) => {
         var idToModify = request.param("id")
-        const SQL = "SELECT idCard, carTitle, carContent, carDesc, carMetrique FROM t_Card WHERE idCard = " + String(idToModify);
+        const SQL = "SELECT idCard, carTitle, carContent, carDesc, carMetrique, GROUP_CONCAT(tagName SEPARATOR ';') AS tagName, GROUP_CONCAT(tagColor SEPARATOR ';') AS tagColor FROM t_Card LEFT JOIN t_Tag ON t_Tag.fkCard=t_Card.idCard WHERE idCard = " + String(idToModify);
         var database = new api;
 
         var connector = database.createConnector();
@@ -14,6 +15,8 @@ module.exports = {
         database.executeSql(connector, SQL, (dataFromDB) => {
             // reconstruct json
             var dataReconstructed = json_mw.createJsonTag(dataFromDB);
+
+            console.log(dataReconstructed.dataset[0].tags.length)
 
             obj = {
                 "card": dataReconstructed,
@@ -35,6 +38,11 @@ module.exports = {
         var tags = JSON.parse(request.body.jsonTags)
         insert_tags.insertTags(tags.dataset)
 
+
+        /** loadInfoPage.loadInfoPage("", "", (str) => {
+                send(response, str)
+            })
+        */
     }
 }
 

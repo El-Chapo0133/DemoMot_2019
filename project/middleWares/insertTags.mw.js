@@ -5,22 +5,41 @@ module.exports = {
      * tags syntax :
      * tags = [{
      *      tagName: "",
-     *      tagColor: "",
-     *      idCard: X
+     *      tagColor: ""
      * }, {...}]
      */
-    insertTags: (tags) => {
+    insertTags: (tags, idCard, callback) => {
+
+        var count = 0
         // api variable
         var database = new api
         // creation connector
         var connector = database.createConnector()
         // insert each tags
-        tags.forEach(tag => {
-            const SQL = "INSERT INTO t_Tag (tagName, tagColor, fkCard) VALUES (" + tag.tagName + ", " + tag.tagcolor + ", " + tag.idCard + ")"
 
-            database.executeSql(connector, SQL, (result) => {
-                console.log("tag added :" + tag.tagName)
-            })
-        });
+        // delete every tag linked with the card
+        const SQL_DEL = "DELETE FROM t_Tag WHERE t_Tag.fkCard = " + idCard
+        database.executeSql(connector, SQL_DEL, (result) => {
+            console.log("[mw] delete all tag id fk:" + idCard)
+        })
+        
+        // add every tag one per one
+        // if here's one or more tag
+        if (tags.dataset.length >= 1) {
+            tags.dataset.forEach((tag) => {
+                var SQL = "INSERT INTO t_Tag (tagName, tagColor, fkCard) VALUES ('" + tag.tagName + "', '" + tag.tagColor + "', " + idCard + ")"
+
+                database.executeSql(connector, SQL, (result) => {
+                    count++
+                    console.log("tag added :" + tag.tagName)
+                    if (count === tags.dataset.length) {
+                        callback()
+                    }
+                })
+            });
+        } else {
+            // if no tag specified
+            callback()
+        }
     }
 }

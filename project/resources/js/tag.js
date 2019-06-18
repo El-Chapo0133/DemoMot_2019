@@ -1,5 +1,6 @@
 var divTag = document.getElementById("addTagArea")
 
+var isGood = true
 var tags = '{ "dataset": [\n]}'
 var tags_json = JSON.parse(tags)
 
@@ -15,15 +16,19 @@ function writeTags() {
         }
         divTag.innerHTML += '<h5 style="background: #' + colorHex + '">' + tag.tagName + '<button class="button-remove-tag" onclick="removeTag(' + tag.idTag + ')"><i class="fas fa-times"></i></button></h5>'
     })
-
     document.getElementById("json_tags").value = tags
 }
-
 function addTag() {
     var name = document.getElementById("inputTag").value
     var color = document.getElementById("select-add").value
 
-    if (name && name.length <= 40) {
+    for (var i = 0; i < name.length; i++) {
+        if (name[i] === '"' || name[i] === '#' || name[i] === '*' || name[i] === '\'' || name[i] === '|') {
+            isGood = false
+        }
+    }
+
+    if (name && name.length <= 40 && isGood === true) {
         if (tags.length !== 17) {
             tags = tags.substring(0, tags.length - 2) + ','
         } else {
@@ -40,7 +45,16 @@ function addTag() {
         document.getElementById("inputTag").value = ""
 
         writeTags()
+    } else if (name.length >= 40) {
+        alert("Veuillez donner un tag de moins de 40 caractères")
+    } else if (!name) {
+        alert("Veuillez remplir le champ Tag pour donner un nom à votre tag")
+    } else if (!isGood) {
+        alert("Caractère interdit\n\", #, *, ', |")
+    } else {
+        alert("Une erreur non répértoriée à été générée, veuillez m'excuser du dérangement")
     }
+    isGood = true
 }
 
 function removeTag(id) {

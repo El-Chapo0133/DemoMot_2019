@@ -45,15 +45,19 @@
                         <option name="tagColor" value="255.90.81">Orange</option>
                         <option name="tagColor" value="124.64.27">Brun</option>
                     </select>
-                    <button onclick="addTag()" class="addTag">Ajouter Tag</button>
-                    <div id="addTagArea"></div>
+                    <button type="button" onclick="addTag()" class="addTag">Ajouter Tag</button>
+                    <div id="addTagArea">
+                        
+                        <% for (var i = 0; i < card.dataset[0].tags.length; i++) { %>
+                            <h5 style="background-color: #<%= card.dataset[0].tags[i].tagColor %>"><%= card.dataset[0].tags[i].tagName %><button class="button-remove-tag" onclick="removeTag(' + <%= i %>> + ')"><i class="fas fa-times"></i></button></h5>
+                        <% } %>
+                    </div>
                     <input name="jsonTags" class="hidden-input" id="json_tags">
                     <button type="submit" class="submit-button-modify">Modifier</button>
                 </form>
             </div>
         </div>
         
-        <script type="text/javascript" src="api.js"></script>
         <script type="text/javascript" src="insertValues.mw.js"></script>
         <script type="text/javascript" src="tag.js"></script>
         <script type="text/javascript" src="js_json_custom.js"></script>

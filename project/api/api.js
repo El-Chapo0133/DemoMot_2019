@@ -3,7 +3,7 @@ let mysql = require('mysql');
 
 class Database {
     constructor() {
-        console.log("API check!");
+        /** do nothing */
     }
     /** ***
      * Instence values for database connexion

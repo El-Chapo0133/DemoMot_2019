@@ -1,11 +1,16 @@
+/** ############################ requires ############################*/
 let express     = require('express')
 let routeIndex  = require('./index')
 let routeAdd    = require('./add')
 let routeModify = require('./modify')
 let routeDelete = require('./delete')
+let date_format = require ('dateformat')
 
 // routeur variable
 let router = express.Router()
+
+// customs variables
+var countRouterAsk = 0
 
 /** **********************************************************************
  * Autor : Levêque Loris
@@ -20,19 +25,24 @@ let router = express.Router()
  * Errors :
  *      Error with the tags
  *          -> create another table if anoter tag is linked
+ *            -> finished 100%
+ *          -> with modification [tag]
+ *             i don't created json, i should do it :D
  * 
  ********************************************************************** */
 
  /** ***
-  * Simply like a constructor
+  * Simply like a constructor but for every router's get/post function call
   * @param {none}
   * @return {none}
   * @callback {none}
   * ******/
 router.use((request, response, next) => {
-    console.log('####################################################');
-    console.log('Time :' + Date.now())
-    console.log('url :' + request.url)
+    var date = date_format(new Date(), "dd-mm-yyyy - HH:MM:ss")
+    console.log('###########################################################################');
+    console.log('Time                   :' + date)
+    console.log('number of router ask   :' + ++countRouterAsk)
+    console.log('url                    :' + request.url + '\n')
     next();
 });
 
@@ -80,11 +90,23 @@ router.get('/modify', (request, response) => {
     routeModify.modify(request, response)
 });
 
+/** ***
+ * Page modify second (will update value)
+ * @param {none}
+ * @return {none}
+ * @callback {none}
+ */
 router.post('/modify-second', (request, response) => {
   console.log("route [router]: modify-second")
   routeModify.modifySecond(request, response)
 });
 
+/** ***
+ * Page delete
+ * @param {none}
+ * @return {none}
+ * @callback {none}
+ */
 router.get('/delete', (request, response) => {
   console.log("route [router]: delete")
   routeDelete.delete(request, response)

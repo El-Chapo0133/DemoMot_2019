@@ -31,8 +31,8 @@ app.use(body_parser.urlencoded({ extended: true }))
 app.use(body_parser.json()); // parse form data client
 
 // Accessibility to ressources files
-app.use(express.static(__dirname + '/ressources/css'))
-app.use(express.static(__dirname + '/ressources/js'))
+app.use(express.static(__dirname + '/resources/css'))
+app.use(express.static(__dirname + '/resources/js'))
 app.use(express.static(__dirname + '/views/'))
 app.use(express.static(__dirname + '/middleWares/'))
 app.use(express.static(__dirname + '/api/'))
