@@ -12,7 +12,17 @@
         <link href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet">
     </head>
     <body>
+        <p class="hidden-param" id="tags_json"></p>
+        <p class="hidden-param" id="idCard"></p>
+
         <% include ../models/header %>
+
+        <div id="divSearch">
+            <form method="get" action="/index">
+                <input type="text" name="search" placeholder="Search" pattern="([A-Za-z1-9àéèüöä+ç%&()=?^.,;:_]{1,40})" title="[espace], -, #, ', |, *, '' inderdits">
+                <button type="submit"><i class="fas fa-search fa-2x"></i></button>
+            </form>
+        </div>
 
         <!-- Content -->
         <table id="table-header-second">
@@ -26,6 +36,10 @@
                 <% include ../models/form.add.ejs %>
             </div>
         </div>
+
+        <% if (goToAcceuil) { %>
+            <p id="link-accueil">Retour à <a href="index">l'acceuil</a></p>
+        <% } %>
 
         <div id="main-content">
             <% cards.dataset.forEach((card) => { %>

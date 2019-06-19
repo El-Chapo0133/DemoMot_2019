@@ -36,7 +36,7 @@ class Database {
                 console.log("ouch! " + err);
                 throw err;
             } else {
-                console.log("connected onto the db ! ");
+                /** connector allright */
             }
         });
         return connector;

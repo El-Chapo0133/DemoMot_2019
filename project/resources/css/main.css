@@ -83,8 +83,10 @@ a {
     float: left;
 }
 .card-desc {
+    margin-left: 5%;
     min-height: 20px;
     float: left;
+    margin-top: -14px;
 }
 .card-content {
     min-height: 40px;
@@ -341,4 +343,59 @@ a {
 }
 #divInfoPage p a {
     color: var(--main-black)
+}
+#divSearch {
+    width: 40px;
+    position: absolute;
+    margin-left: 20%;
+    float: left;
+    transition-duration: .2s;
+    background: var(--main-grey);
+    border-radius: 20px;
+}
+#divSearch form button {
+    background: var(--main-black);
+    border: none;
+    border-radius: 50%;
+    color: var(--white);
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-left: 8px;
+    padding-right: 8px;
+    cursor: pointer;
+    float: right;
+}
+#divSearch form input {
+    float: left;
+    position: absolute;
+    width: 0;
+    border: none;
+    margin: 0;
+    outline: none;
+    transition: .2s;
+    background: none;
+    margin-top: 11px;
+    margin-left: 8px;
+    font-size: 16px;
+    color: var(--white)
+}
+#divSearch:hover {
+    width: 180px;
+}
+#divSearch:hover > form input {
+    width: 120px;
+}
+#link-accueil {
+    position: absolute;
+    margin-left: 45%;
+    margin-top: 3%;
+    font-size: 20px;
+}
+#link-accueil a {
+    color: var(--main-black);
+}
+.hidden-param {
+    opacity: 0;
+    position: absolute;
+    margin-left: -900px;
 }

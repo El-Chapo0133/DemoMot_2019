@@ -13,6 +13,9 @@
     <body>
         <% include ../models/header %>
 
+        <p class="hidden-param" id="tags_json"><%= initialTags %></p>
+        <p class="hidden-param" id="idCard"><%= idCard %></p>
+
         <div class="goBack">
             <a href="/"><i class="fas fa-arrow-circle-left fa-4x"></i></a>
         </div>
@@ -24,7 +27,7 @@
         
         <div id="modify-content">
             <div id="form">
-                <form method="post" action="/modify-second?id=<%= card.idCard %>">
+                <form method="post" action="/modify-second?id=<%= card.dataset[0].idCard %>">
                     <label class="labFirst">Titre</label>
                     <textarea type="text" name="title" id="inputTitle" cols="1"><%= card.dataset[0].carTitle %></textarea>
                     <label class="labFirst">Description</label>
@@ -48,8 +51,10 @@
                     <button type="button" onclick="addTag()" class="addTag">Ajouter Tag</button>
                     <div id="addTagArea">
                         
-                        <% for (var i = 0; i < card.dataset[0].tags.length; i++) { %>
-                            <h5 style="background-color: #<%= card.dataset[0].tags[i].tagColor %>"><%= card.dataset[0].tags[i].tagName %><button class="button-remove-tag" onclick="removeTag(' + <%= i %>> + ')"><i class="fas fa-times"></i></button></h5>
+                        <% if (card.dataset[0].tags[0].tagName != null) { %>
+                            <% for (var i = 0; i < card.dataset[0].tags.length; i++) { %>
+                                <h5 style="background-color: #<%= card.dataset[0].tags[i].tagColor %>"><%= card.dataset[0].tags[i].tagName %><button class="button-remove-tag" onclick="removeTag(' + <%= i %>> + ')"><i class="fas fa-times"></i></button></h5>
+                            <% } %>
                         <% } %>
                     </div>
                     <input name="jsonTags" class="hidden-input" id="json_tags">
@@ -57,8 +62,7 @@
                 </form>
             </div>
         </div>
-        
-        <script type="text/javascript" src="insertValues.mw.js"></script>
+            
         <script type="text/javascript" src="tag.js"></script>
         <script type="text/javascript" src="js_json_custom.js"></script>
         

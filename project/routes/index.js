@@ -2,6 +2,8 @@ let api = require("../api/api");
 let ejs = require('ejs');
 let json_mw = require('../middleWares/json_tag.mw');
 let body_parser = require('body-parser');
+let orderTag = require('../middleWares/order_tag.mw')
+let getColor = require('../middleWares/color_tag.mw')
 
 /** **********************************************************************
  * Autor : Levêque Loris
@@ -20,7 +22,11 @@ let body_parser = require('body-parser');
 
 module.exports = {
     index: (request, response) => {
-        const SQL = "SELECT idCard, carTitle, carDesc, carContent, carMetrique, GROUP_CONCAT(tagName SEPARATOR ';') AS tagName, GROUP_CONCAT(tagColor SEPARATOR ';') AS tagColor FROM t_Card LEFT JOIN t_Tag ON t_Tag.fkCard=t_Card.idCard GROUP BY t_Card.idCard";
+        console.log(getColor.getColor10("de54ef"))
+
+        var pageTitle = "Accueil"
+
+        const SQL = "SELECT idCard, carTitle, carDesc, carContent, carMetrique, GROUP_CONCAT(DISTINCT tagName ORDER BY tagName SEPARATOR ';') AS tagName, GROUP_CONCAT(tagColor SEPARATOR ';') AS tagColor FROM t_Card LEFT JOIN t_Tag ON t_Tag.fkCard=t_Card.idCard GROUP BY t_Card.idCard";
 
         var database = new api;
 
@@ -33,8 +39,18 @@ module.exports = {
             // object to send into the view
             obj = {
                 "cards": dataReconstructed,
-                "pageTitle": "Accueil"
+                "pageTitle": pageTitle,
+                "goToAcceuil" : false
             };
+
+            if (request.param("search") != "" && request.param("search") != undefined) {
+                obj.cards = orderTag.orderTag(dataReconstructed, request.param('search'))
+                obj.pageTitle = "Recherche : " + request.param("search")
+                obj.goToAcceuil = true
+            } else {
+                /** do nothing */
+            }
+
             // generate html with ejs library
             // @callback {when file is loaded}
             ejs.renderFile("views/main.ejs", obj, (err, str) => {

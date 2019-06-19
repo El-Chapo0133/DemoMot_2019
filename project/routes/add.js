@@ -39,6 +39,7 @@ module.exports = {
         if (!carTitle || !carDesc || !carContent) {
             isGood = false
         }
+        //console.log(request.body.json_tags)
         // no tag
         if (request.body.json_tags == "") {
             tags = JSON.parse('{ "dataset": [] }')

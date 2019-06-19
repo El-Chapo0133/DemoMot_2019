@@ -2,6 +2,8 @@ let api         = require('../api/api')
 let ejs         = require('ejs')
 let json_mw     = require('../middleWares/json_tag.mw');
 let insert_tags = require('../middleWares/insertTags.mw')
+let del_tag     = require('../middleWares/del_tags.mw')
+let color_tag   = require('../middleWares/color_tag.mw')
 let loadInfoPage = require('../custom/loadInfoPage')
 
 module.exports = {
@@ -13,16 +15,30 @@ module.exports = {
         var connector = database.createConnector();
 
         database.executeSql(connector, SQL, (dataFromDB) => {
+            console.log(dataFromDB)
             // reconstruct json
             var dataReconstructed = json_mw.createJsonTag(dataFromDB);
 
-            console.log(dataReconstructed.dataset[0].tags.length)
+            var tags_front = '{ "dataset": [\n'
+            var count = 0
+            dataReconstructed.dataset[0].tags.forEach((tag) => {
+                if (tag.tagName != null) {
+                    tags_front += '{ "idTag": ' + count++ + ', "tagName": "' + tag.tagName + '", "tagColor": "' + tag.tagColor + '", "idCard": ' + request.param("id") + '},'
+                }
+            })
+            if (tags_front[tags_front.length - 1] != '[') {
+                tags_front = tags_front.substring(0, tags_front.length - 1)
+            }
+            tags_front += ']}'
 
             obj = {
                 "card": dataReconstructed,
-                "pageTitle": "Modification"
+                "pageTitle": "Modification",
+                "initialTags": tags_front,
+                "idCard": request.param("id")
             }
-    
+            console.log(obj.card.dataset[0].tags)
+
             ejs.renderFile('views/modify.ejs', obj, (err, str) => {
                 if (err) {
                     console.log("failed load modify.ejs");
@@ -34,15 +50,68 @@ module.exports = {
             });
         });
     },
-    modifySecond: (request, reponse) => {
-        var tags = JSON.parse(request.body.jsonTags)
-        insert_tags.insertTags(tags.dataset)
+    modifySecond: (request, response) => {
+        // get
+        var idCard = request.param('id')
+        // post
+        var carTitle, carDesc, carContent, carMetrique
+        var tags
+        // variables
+        var isGood = true;
+        var database = new api
+        var connector = database.createConnector()
 
+        carTitle = request.body.title.replace(',', ' ');
+        carDesc = request.body.desc.replace(',', ' ');
+        carContent = request.body.content.replace(',', ' ');
+        if (!isNaN(parseInt(request.body.metrique, 10))) {
+            // id input number
+            carMetrique = parseInt(request.body.metrique)
+        } else if (request.body.metrique > 255) {
+            // if input > 255
+            carMetrique = 255
+        } else if (request.body.metrique < 1) {
+            // if input < 1
+            carMetrique = 1
+        } else {
+            carMetrique = 255
+        }
+        // check if some input(s) are empty
+        if (!carTitle || !carDesc || !carContent) {
+            isGood = false
+        }
 
-        /** loadInfoPage.loadInfoPage("", "", (str) => {
-                send(response, str)
+        if (request.body.jsonTags === "") {
+            tags = JSON.parse('{ "dataset": [] }')
+        } else {
+            tags = JSON.parse(request.body.jsonTags)
+        }
+
+        // check if color is on right syntax -> [red].[green].[blue]
+        tags.dataset.forEach((tag) => {
+            // isn't ok
+            if (tag.tagColor.split('.').length < 3) {
+                tag.tagColor = color_tag.getColor10(tag.tagColor)
+            } else {
+                /** do nothing */
+            }
+        })
+
+        // delete all tags linked with the card -> OK
+        del_tag.delTagsByCard(idCard, () => {
+            console.log("[mw] deleted all tags with the cardId:" + idCard)
+        })
+        // then update card -> OK
+        const SQL = "UPDATE t_Card SET carTitle = '" + carTitle + "', carDesc = '" + carDesc + "', carContent = '" + carContent + "', carMetrique = " + carMetrique + " WHERE t_Card.idCard=" + idCard
+
+        database.executeSql(connector, SQL, (result) => {
+            // then insert all tag ->
+            insert_tags.insertTags(tags, idCard, () => {
+                loadInfoPage.loadInfoPage("Réussite!", "Votre carte a bien été mise à jour.", (str) => {
+                    send(response, str)
+                })
             })
-        */
+        })
     }
 }
 

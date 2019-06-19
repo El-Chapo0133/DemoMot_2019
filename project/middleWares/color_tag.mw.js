@@ -1,5 +1,5 @@
 module.exports = {
-    getColor(stringColor) {
+    getColorHex(stringColor) {
         if (stringColor !== 'null') {
             // remove first and last char (") -> useless -> add it at least
             stringColor = stringColor.substring(1, stringColor.length - 1);
@@ -13,6 +13,21 @@ module.exports = {
             }
 
             toReturn = '"' + toReturn.toString() + '"';
+            // then return it
+            return toReturn;
+        } else {
+            return null;
+        }
+    },
+    getColor10(stringColor) {
+        if (stringColor !== 'null') {
+            var toReturn = ""
+            for (var i = 0; i < 6; i += 2) {
+                var actualColor = stringColor[i] + stringColor[i + 1]
+                toReturn += (parseInt(actualColor, 16)).toString(10) + '.';
+            }
+            toReturn = toReturn.substring(0, toReturn.length - 1)
+
             // then return it
             return toReturn;
         } else {

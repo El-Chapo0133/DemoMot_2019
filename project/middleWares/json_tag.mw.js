@@ -107,7 +107,7 @@ module.exports = {
                             tags += tab + tab + '{\n';
                             tags += tab + tab + tab + '"tagName": ' + tagsValue[0][k] + ',\n';
                             // middlewareColor.getColor(tagsValue[1][k]);
-                            tags += tab + tab + tab + '"tagColor": ' + middlewareColor.getColor(tagsValue[1][k]) + '\n';
+                            tags += tab + tab + tab + '"tagColor": ' + middlewareColor.getColorHex(tagsValue[1][k]) + '\n';
                             tags += tab + tab + '}\n';
                         } else {
                             // if tags > 1
@@ -115,13 +115,13 @@ module.exports = {
                                 // last index
                                 tags += tab + tab + '{\n';
                                 tags += tab + tab + tab + '"tagName": ' + tagsValue[0][k] + ',\n';
-                                tags += tab + tab + tab + '"tagColor": ' + middlewareColor.getColor(tagsValue[1][k]) + '\n';
+                                tags += tab + tab + tab + '"tagColor": ' + middlewareColor.getColorHex(tagsValue[1][k]) + '\n';
                                 tags += tab + tab + '}\n';
                             } else {
                                 // not last index
                                 tags += tab + tab + '{\n';
                                 tags += tab + tab + tab + '"tagName": ' + tagsValue[0][k] + ',\n';
-                                tags += tab + tab + tab + '"tagColor": ' + middlewareColor.getColor(tagsValue[1][k]) + '\n';
+                                tags += tab + tab + tab + '"tagColor": ' + middlewareColor.getColorHex(tagsValue[1][k]) + '\n';
                                 tags += tab + tab + '},\n';
                             }
                         }

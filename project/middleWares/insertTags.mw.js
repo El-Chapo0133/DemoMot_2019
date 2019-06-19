@@ -17,12 +17,6 @@ module.exports = {
         var connector = database.createConnector()
         // insert each tags
 
-        // delete every tag linked with the card
-        const SQL_DEL = "DELETE FROM t_Tag WHERE t_Tag.fkCard = " + idCard
-        database.executeSql(connector, SQL_DEL, (result) => {
-            console.log("[mw] delete all tag id fk:" + idCard)
-        })
-        
         // add every tag one per one
         // if here's one or more tag
         if (tags.dataset.length >= 1) {
