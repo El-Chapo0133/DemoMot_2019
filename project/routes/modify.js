@@ -77,10 +77,48 @@ module.exports = {
             carMetrique = 255
         }
         // check if some input(s) are empty
-        if (!carTitle || !carDesc || !carContent) {
+        if (!carTitle || !carDesc || !carContent || carTitle == "" || carDesc == "" || carContent == "") {
             isGood = false
         }
-
+        // check if input has only unaccepted char
+        var checkChar = false
+        // for title
+        if (carTitle) {
+            for (var i = 0; i < carTitle.length; i++) {
+                if (carTitle[i] != " " || carTitle[i] == "'" || carTitle[i] == "," || carTitle[i] == '"') {
+                    checkChar = true
+                }
+            }
+            if (checkChar === false) {
+                isGood = false
+            }
+        }
+        checkChar = false
+        // for description
+        if (carDesc) {
+            for (var i = 0; i < carDesc.length; i++) {
+                if (carDesc[i] != " " || carDesc[i] == "'" || carDesc[i] == "," || carDesc[i] == '"') {
+                    checkChar = true
+                }
+            }
+            if (checkChar === false) {
+                isGood = false
+            }
+        }
+        checkChar = false
+        // for content
+        if (carContent) {
+            for (var i = 0; i < carContent.length; i++) {
+                if (carContent[i] != " " || carContent[i] == "'" || carContent[i] == "," || carContent[i] == '"') {
+                    checkChar = true
+                }
+            }
+            if (checkChar === false) {
+                isGood = false
+            }
+        }
+        // check if json of tag is empty and set json -> for to be accepted
+        // if json tag is empty, will create a dataset array empty -> no tag created
         if (request.body.jsonTags === "") {
             tags = JSON.parse('{ "dataset": [] }')
         } else {
@@ -97,26 +135,40 @@ module.exports = {
             }
         })
 
-        // delete all tags linked with the card -> OK
-        del_tag.delTagsByCard(idCard, () => {
-            console.log("[mw] deleted all tags with the cardId:" + idCard)
-        })
-        // then update card -> OK
-        const SQL = "UPDATE t_Card SET carTitle = '" + carTitle + "', carDesc = '" + carDesc + "', carContent = '" + carContent + "', carMetrique = " + carMetrique + " WHERE t_Card.idCard=" + idCard
+        // if all is ok
+        if (isGood == true) {
+            // delete all tags linked with the card -> OK
+            del_tag.delTagsByCard(idCard, () => {
+                console.log("[mw] deleted all tags with the cardId:" + idCard)
+            })
+            // then update card -> OK
+            const SQL = "UPDATE t_Card SET carTitle = '" + carTitle + "', carDesc = '" + carDesc + "', carContent = '" + carContent + "', carMetrique = " + carMetrique + " WHERE t_Card.idCard=" + idCard
 
-        database.executeSql(connector, SQL, (result) => {
-            // then insert all tag ->
-            insert_tags.insertTags(tags, idCard, () => {
-                loadInfoPage.loadInfoPage("Réussite!", "Votre carte a bien été mise à jour.", (str) => {
-                    send(response, str)
+            database.executeSql(connector, SQL, (result) => {
+                // then insert all tag ->
+                insert_tags.insertTags(tags, idCard, () => {
+                    loadInfoPage.loadInfoPage("Réussite!", "Votre carte a bien été mise à jour.", (str) => {
+                        send(response, str)
+                    })
                 })
             })
-        })
+        } else {
+            // is error
+            loadInfoPage.loadInfoPage("Erreur!", "Une erreur à été détectée (champ vide ou non-valide).", (str) => {
+                send(response, str)
+            })
+        }
     }
 }
 
+/**
+ * Will send a string html to client
+ * @param {response} response 
+ * @param {string} str
+ * @return {none}
+ * @callback {none} 
+ */
 function send(response, str) {
-    //WriteHead(200, { "Content-Type": "text/html" });
     response.write(str);
     response.end();
 }

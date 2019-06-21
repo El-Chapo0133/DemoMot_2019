@@ -46,6 +46,43 @@ module.exports = {
         } else {
             tags = JSON.parse(request.body.json_tags)
         }
+        // check if input has only unaccepted char
+        var checkChar = false
+        // for title
+        if (carTitle) {
+            for (var i = 0; i < carTitle.length; i++) {
+                if (carTitle[i] != " " || carTitle[i] == "'" || carTitle[i] == "," || carTitle[i] == '"') {
+                    checkChar = true
+                }
+            }
+            if (checkChar === false) {
+                isGood = false
+            }
+        }
+        checkChar = false
+        // for description
+        if (carDesc) {
+            for (var i = 0; i < carDesc.length; i++) {
+                if (carDesc[i] != " " || carDesc[i] == "'" || carDesc[i] == "," || carDesc[i] == '"') {
+                    checkChar = true
+                }
+            }
+            if (checkChar === false) {
+                isGood = false
+            }
+        }
+        checkChar = false
+        // for content
+        if (carContent) {
+            for (var i = 0; i < carContent.length; i++) {
+                if (carContent[i] != " " || carContent[i] == "'" || carContent[i] == "," || carContent[i] == '"') {
+                    checkChar = true
+                }
+            }
+            if (checkChar === false) {
+                isGood = false
+            }
+        }
 
         if (isGood) {
             const SQL = "INSERT INTO t_Card (carTitle, carDesc, carContent, carMetrique, fkUser) VALUES ('" + carTitle + "', '" + carDesc + "', '" + carContent + "', " + carMetrique + ", 1)";
@@ -59,13 +96,13 @@ module.exports = {
                     //response.redirect('http://localhost:8081/index');
                     //window.location.href = 'index';
                     //response.redirect('index');
-                    redirect_index.loadInfoPage('Réussite', "Votre carte à bien été ajoutée", (str) => {
+                    redirect_index.loadInfoPage('Réussite!', "Votre carte à bien été ajoutée", (str) => {
                         send(response, str);
                     })
                 })
             });
         } else {
-            redirect_index.loadInfoPage('Erreur', "Une erreur à été générée", (str) => {
+            redirect_index.loadInfoPage('Erreur!', "Une erreur à été détectée (champ vide ou non-valide).", (str) => {
                 send(response, str);
             })
         }
