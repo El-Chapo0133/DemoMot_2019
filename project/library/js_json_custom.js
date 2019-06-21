@@ -1,8 +1,22 @@
 class js_json_custom {
-    static createJson(string) {
+    createJson(string) {
         return JSON.parse(string)
     }
-    static createString(json) {
+    createString(json) {
         return JSON.stringify(json)
+    }
+    getValue(jsonAccessKey) {
+        if (jsonAccessKey) {
+            return jsonAccessKey
+        } else {
+            return "not defined or accessible | cannot access " + String(jsonAccessKey)
+        }
+    }
+    uptadeValue(jsonAccessKey, data) {
+        if (jsonAccessKey) {
+            jsonAccessKey = data
+        } else {
+            return "not defined or accessible | cannot update " + String(jsonAccessKey)
+        }
     }
 }

@@ -8,15 +8,14 @@ let getColor = require('../middleWares/color_tag.mw')
 /** **********************************************************************
  * Autor : Levêque Loris
  * Creation Date : 05.06.2019
- * Modification Date : 06.06.2019
+ * Modification Date : 21.06.2019
  * 
  * Description :
  *      Route for page index
  *      Get data from db (Cards)
  * 
  * Errors :
- *      Error with the tags
- *          -> create another table if anoter tag is linked
+ *      no one already detected
  * 
  ********************************************************************** */
 

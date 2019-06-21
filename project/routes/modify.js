@@ -6,6 +6,20 @@ let del_tag     = require('../middleWares/del_tags.mw')
 let color_tag   = require('../middleWares/color_tag.mw')
 let loadInfoPage = require('../custom/loadInfoPage')
 
+/** **********************************************************************
+ * Autor : Levêque Loris
+ * Creation Date : 05.06.2019
+ * Modification Date : 06.06.2019
+ * 
+ * Description :
+ *      Route for page modify and modify-second
+ *      Uptade data from db (Cards and Tags)
+ * 
+ * Errors :
+ *      no one has been detected
+ * 
+ ********************************************************************** */
+
 module.exports = {
     modify: (request, response) => {
         var idToModify = request.param("id")

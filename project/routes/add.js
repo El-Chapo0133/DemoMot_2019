@@ -5,14 +5,14 @@ let redirect_index = require('../custom/loadInfoPage')
 /** **********************************************************************
  * Autor : Levêque Loris
  * Creation Date : 05.06.2019
- * Modification Date : 06.06.2019
+ * Modification Date : 21.06.2019
  * 
  * Description :
  *      Route for page add and modify
- *      Get data from db (Cards) if id in post data
+ *      Insert data into db (Cards and Tags) id in post data
  * 
  * Errors :
- *      
+ *      no one already dected
  * 
  ********************************************************************** */
 
