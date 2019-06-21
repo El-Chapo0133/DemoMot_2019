@@ -17,11 +17,26 @@
 
         <% include ../models/header %>
 
-        <div id="divSearch">
-            <form method="get" action="/index">
+        <form method="get" action="/index">
+            <div id="divSearch">
                 <input type="text" name="search" placeholder="Search" pattern="([A-Za-z1-9àéèüöä+ç%&()=?^.,;:_]{1,40})" title="[espace], -, #, ', |, *, '' inderdits">
                 <button type="submit"><i class="fas fa-search fa-2x"></i></button>
-            </form>
+            </div>
+        </form>
+        <div id="order-content">
+            <% if (order == "normal") { %>
+                <button onclick="window.location.assign('/?order=normal')" id="active-order">normal</button>
+                <button onclick="window.location.assign('/?order=asc')" id="inactive-order">asc</button>
+                <button onclick="window.location.assign('/?order=desc')" id="inactive-order">desc</button>
+            <% } else if (order == "asc") { %>
+                <button onclick="window.location.assign('/?order=normal')" id="inactive-order">normal</button>
+                <button onclick="window.location.assign('/?order=asc')" id="active-order">asc</button>
+                <button onclick="window.location.assign('/?order=desc')" id="inactive-order">desc</button>
+            <% } else { %>
+                <button onclick="window.location.assign('/?order=normal')" id="inactive-order">normal</button>
+                <button onclick="window.location.assign('/?order=asc')" id="inactive-order">asc</button>
+                <button onclick="window.location.assign('/?order=desc')" id="active-order">desc</button>
+            <% } %>
         </div>
 
         <!-- Content -->
@@ -42,8 +57,14 @@
         <% } %>
 
         <div id="main-content">
+            <% var count = 0 %>
             <% cards.dataset.forEach((card) => { %>
-                <div class="card-main-left">
+                <% count++ %>
+                <% if(count == cards.dataset.length) { %>
+                    <div class="card-main-left" id="last-card">
+                <% } else { %>
+                    <div class="card-main-left">
+                <% } %>
                     <div class="tag-content">
                         <% card.tags.forEach((tag) => { %>
                             <h5 style="background-color: #<%= tag.tagColor %>"><%= tag.tagName %></h5>
@@ -52,7 +73,7 @@
                     <h2 class="card-title"><%= card.carTitle %></h2>
                     <p class="card-desc"><%= card.carDesc %></p>
                     <p class="card-content"><%= card.carContent %></p>
-                    <p class="card-metrique"><%= card.carMetrique %>/255</p>
+                    <p class="card-metrique">priorité <%= card.carMetrique %>/255</p>
                     <p class="card-link"><a href="/modify?id=<%= card.idCard %>">Modifier</a> <a href="/delete?id=<%= card.idCard %>">Supprimer</a></p>
                 </div>
             <% }) %>

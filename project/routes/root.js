@@ -5,12 +5,14 @@ let routeAdd    = require('./add')
 let routeModify = require('./modify')
 let routeDelete = require('./delete')
 let date_format = require ('dateformat')
+let Cookies     = require('cookies')
 
 // routeur variable
 let router = express.Router()
 
 // customs variables
 var countRouterAsk = 0
+var keys = ['keyboard']
 
 /** **********************************************************************
  * Autor : Levêque Loris
@@ -54,6 +56,13 @@ router.use((request, response, next) => {
  * @callback {none}
  */
 router.get('/', (request, response) => {
+  global.cookies = {}
+  if (!request.param('order')) {
+    global.cookies.order = "normal"
+  } else {
+    global.cookies.order = request.param("order")
+  }
+
   console.log("route [router]: /  -> redirect to {index}")
   response.redirect('index')
 });

@@ -5,6 +5,7 @@
     width: 100%;
     left: 0;
     background-color: var(--main-green);
+    margin-top: 60px;
 }
 
 #footer-main p {

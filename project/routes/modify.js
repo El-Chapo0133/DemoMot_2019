@@ -29,7 +29,6 @@ module.exports = {
         var connector = database.createConnector();
 
         database.executeSql(connector, SQL, (dataFromDB) => {
-            console.log(dataFromDB)
             // reconstruct json
             var dataReconstructed = json_mw.createJsonTag(dataFromDB);
 
@@ -51,7 +50,6 @@ module.exports = {
                 "initialTags": tags_front,
                 "idCard": request.param("id")
             }
-            console.log(obj.card.dataset[0].tags)
 
             ejs.renderFile('views/modify.ejs', obj, (err, str) => {
                 if (err) {
@@ -138,6 +136,7 @@ module.exports = {
         } else {
             tags = JSON.parse(request.body.jsonTags)
         }
+        console.log(tags)
 
         // check if color is on right syntax -> [red].[green].[blue]
         tags.dataset.forEach((tag) => {

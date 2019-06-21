@@ -23,21 +23,34 @@ module.exports = {
     index: (request, response) => {
         var pageTitle = "Accueil"
 
-        const SQL = "SELECT idCard, carTitle, carDesc, carContent, carMetrique, GROUP_CONCAT(DISTINCT tagName ORDER BY tagName SEPARATOR ';') AS tagName, GROUP_CONCAT(tagColor SEPARATOR ';') AS tagColor FROM t_Card LEFT JOIN t_Tag ON t_Tag.fkCard=t_Card.idCard GROUP BY t_Card.idCard";
+        var SQL = "SELECT idCard, carTitle, carDesc, carContent, carMetrique, GROUP_CONCAT(DISTINCT tagName ORDER BY tagName SEPARATOR ';') AS tagName, GROUP_CONCAT(tagColor SEPARATOR ';') AS tagColor FROM t_Card LEFT JOIN t_Tag ON t_Tag.fkCard=t_Card.idCard GROUP BY t_Card.idCard"
 
-        var database = new api;
+        // ORDER BY t_Card.carMetrique ASC
+        if (global.cookies.order === "asc") {
+            // order by asc metrique
+            SQL += " ORDER BY t_Card.carMetrique ASC"
+        } else if (global.cookies.order === "desc") {
+            // order by desc metrique
+            SQL += " ORDER BY t_Card.carMetrique DESC"
+        } else {
+            // other order -> order by id (date)
+            SQL += " ORDER BY t_Card.idCard ASC"
+        }
 
-        var connector = database.createConnector();
+        var database = new api
+
+        var connector = database.createConnector()
 
         database.executeSql(connector, SQL, (dataFromDB) => {
             // reconstruct json
-            var dataReconstructed = json_mw.createJsonTag(dataFromDB);
+            var dataReconstructed = json_mw.createJsonTag(dataFromDB)
 
             // object to send into the view
             obj = {
                 "cards": dataReconstructed,
                 "pageTitle": pageTitle,
-                "goToAcceuil" : false
+                "goToAcceuil" : false,
+                "order": global.cookies.order
             };
 
             if (request.param("search") != "" && request.param("search") != undefined) {
