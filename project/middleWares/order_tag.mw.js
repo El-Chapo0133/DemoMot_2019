@@ -20,6 +20,8 @@ module.exports = {
         }
         // then add end of json
         returnJson += "\n]}"
+
+        console.log(returnJson)
         // simple return json parsed
         return JSON.parse(returnJson)
     }
