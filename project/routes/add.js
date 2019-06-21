@@ -109,6 +109,13 @@ module.exports = {
     }
 }
 
+/**
+ * Will send a string html to client
+ * @param {response} response 
+ * @param {string} str
+ * @return {none}
+ * @callback {none} 
+ */
 function send(response, str) {
     response.writeHead(200, { "Content-Type": "text/html" });
     response.write(str);

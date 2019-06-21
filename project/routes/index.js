@@ -52,11 +52,13 @@ module.exports = {
             /** give a pause -> like a callback for when obj.dataset[obj.cards.dataset.length - 1].tags is defined
              * for resolving bug for tags color
              */
+            console.log("# callback for genering good color to tag [callback input]:console.log")
             if (obj.cards.dataset.length == 0) {
                 console.log(obj.cards.dataset)
             } else {
                 console.log(obj.cards.dataset[obj.cards.dataset.length - 1])
             }
+            console.log("# end callback")
 
             // generate html with ejs library
             // @callback {when file is loaded}
@@ -74,6 +76,13 @@ module.exports = {
     }
 }
 
+/**
+ * Will send a string html to client
+ * @param {response} response 
+ * @param {string} str
+ * @return {none}
+ * @callback {none} 
+ */
 function send(response, str) {
     response.writeHead(200, { "Content-Type": "text/html" });
     response.write(str);
