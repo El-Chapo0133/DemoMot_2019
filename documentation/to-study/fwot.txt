@@ -1,8 +1,8 @@
 Force(s) :
-	Know and like nodejs
+	Know and love nodejs
 
 Weakness(s) :
-	Simply bad at web coding
+	Simply bad in web coding
 	  -> need an very simply organisation
 
 Opportunity(ies) :
